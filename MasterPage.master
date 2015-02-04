@@ -94,6 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- BEGIN PAGE HEADER-->
                     <h3 class="page-title">Blank Page <small>blank page</small>
                     </h3>
+                    <asp:ContentPlaceHolder ID="Balloons" runat="server"></asp:ContentPlaceHolder>
                     <!-- END PAGE HEADER-->
                     <!-- BEGIN PAGE CONTENT-->
                     <div class="row">
