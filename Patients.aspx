@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Patients.aspx.cs" Inherits="Patients" MasterPageFile="~/MasterPage.master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -83,7 +84,8 @@
                             <td>11/12/1999
                             </td>
                             <td>
-                                <a href="#">Editar</a> &nbsp; <a href="#">Eliminar</a>
+                                <a href="#" class="btn btn-sm blue">Opciones
+                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -100,7 +102,8 @@
                             <td>01/04/2014
                             </td>
                             <td>
-                                <a href="#">Editar</a> &nbsp; <a href="#">Eliminar</a>
+                                <a href="#" class="btn btn-sm blue">Opciones
+                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -117,7 +120,8 @@
                             <td>10/12/2009
                             </td>
                             <td>
-                                <a href="#">Editar</a> &nbsp; <a href="#">Eliminar</a>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -127,5 +131,36 @@
 
         </div>
     </div>
+
+    <div class="modal fade bs-modal-sm" id="opciones" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Opciones</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Default</label>
+                        <div class="col-md-9">
+                            <select class="bs-select form-control">
+                                <option>Mustard</option>
+                                <option>Ketchup</option>
+                                <option>Relish</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn blue">Aceptar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</asp:Content>
+<asp:Content ID="sss" ContentPlaceHolderID="scripts" runat="server">
 </asp:Content>
 
