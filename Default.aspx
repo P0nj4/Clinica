@@ -106,7 +106,7 @@
                                 <span class="badge badge-danger">22</span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
@@ -117,7 +117,7 @@
                             <td><span class="badge badge-warning">45</span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
@@ -129,7 +129,7 @@
                                 <span class="badge badge-primary">120+ </span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                     </tbody>
@@ -140,7 +140,7 @@
     <!-- fin Proximas consultas -->
 
     <!-- Consultas pendientes -->
-     <div class="portlet box blue">
+    <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
                 <i class="fa fa-list"></i>Consultas sujetas a cambio de estado
@@ -177,7 +177,7 @@
                                 <span class="label label-danger">Muy demorado</span>
                             </td>
                             <td>
-                                <a href="#">Cambiar estado</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
@@ -188,7 +188,7 @@
                             <td><span class="label label-warning">Algo demorado</span>
                             </td>
                             <td>
-                                <a href="#">Cambiar estado</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
@@ -200,7 +200,7 @@
                                 <span class="label label-primary">Pendiente</span>
                             </td>
                             <td>
-                                <a href="#">Cambiar estado</a>
+                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
                             </td>
                         </tr>
                     </tbody>
@@ -209,5 +209,37 @@
         </div>
     </div>
     <!-- fin Consultas pendientes -->
+
+
+    <div class="modal fade bs-modal-sm" id="change-status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="" class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Cambiar estado de la consulta a:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                                <input type="radio" class="toggle">
+                                Consulta confirmada
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" class="toggle">
+                                Conculta cancelada
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn blue">Save changes</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </asp:Content>
 
