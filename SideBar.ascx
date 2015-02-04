@@ -11,14 +11,14 @@
                         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
                         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                         <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                            <li class="start">
-                                <a href="index.html">
+                            <li class="start" ID="liDashboard" runat="server">
+                                <a href="/">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                            <li class="active open">
+                            <li class="" ID="liPatients" runat="server">
                                 <a href="javascript:;">
                                     <i class="icon-users"></i>
                                     <span class="title">Pacientes</span>
@@ -27,18 +27,18 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="ecommerce_index.html">
+                                        <a href="Patients.aspx">
                                             <i class="icon-users"></i>
                                             Listado</a>
                                     </li>
                                     <li>
-                                        <a href="ecommerce_orders.html">
+                                        <a href="AddPatient.aspx">
                                             <i class="icon-user-follow"></i>
                                             Agregar nuevo</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li ID="liConsults" runat="server">
                                 <a href="javascript:;">
                                     <i class="icon-notebook "></i>
                                     <span class="title">Consultas</span>

@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AddPatient.aspx.cs" Inherits="AddPatient" MasterPageFile="~/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -25,54 +26,52 @@
                             <asp:TextBox ID="txtName" CssClass="form-control" runat="server" />
                         </div>
                     </div>
-                </div>
-                <div class="form-body">
+
                     <div class="form-group">
                         <label class="control-label col-md-3">Apellido</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtLastName" CssClass="form-control" runat="server" />
                         </div>
                     </div>
-                </div>
-                <div class="form-body">
+
                     <div class="form-group">
                         <label class="control-label col-md-3">Fecha de nacimiento</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtDate" CssClass="form-control birthDay" runat="server" />
                         </div>
+
                     </div>
-                </div>
-                <div class="form-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Telefono de contacto</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtPhone" CssClass="form-control" runat="server" />
                         </div>
                     </div>
-                </div>
-                <div class="form-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Imagen</label>
-                        <div class="col-md-4">
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-													<div class="input-group input-large">
-														<div class="form-control uneditable-input span3" data-trigger="fileinput">
-															<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
-															</span>
-														</div>
-														<span class="input-group-addon btn default btn-file">
+                    <div class="form-group ">
+											<label class="control-label col-md-3">Image Upload #1</label>
+											<div class="col-md-9">
+												<div class="fileinput fileinput-new" data-provides="fileinput">
+													<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+													</div>
+													<div>
+														<span class="btn default btn-file">
 														<span class="fileinput-new">
-														Select file </span>
+														Select image </span>
 														<span class="fileinput-exists">
 														Change </span>
-														<input type="hidden"><input type="file" name="...">
+														<input type="file" name="...">
 														</span>
-														<a href="#" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
+														<a href="#" class="btn red fileinput-exists" data-dismiss="fileinput">
 														Remove </a>
 													</div>
 												</div>
-                        </div>
-                    </div>
+												<div class="clearfix margin-top-10">
+													<span class="label label-danger">
+													NOTE! </span>
+													Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead.
+												</div>
+											</div>
+										</div>
                 </div>
                 <div class="form-actions">
                     <div class="row">
@@ -87,14 +86,11 @@
     </div>
 </asp:Content>
 
-<asp:Content ID="place3" ContentPlaceHolderID="scripts" runat="server" >
+<asp:Content ID="place3" ContentPlaceHolderID="scripts" runat="server">
+
+    <script src="./assets/admin/pages/scripts/components-form-tools.js"></script>
     <script type="text/javascript">
-        $.extend($.inputmask.defaults, {
-            'autounmask': true
-        });
-        $(".birthDay").inputmask("d/m/y", {
-            "placeholder": "dd/mm/yyyy"
-        });
+       
     </script>
 
 </asp:Content>

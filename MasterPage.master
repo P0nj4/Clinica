@@ -53,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </head>
 <!-- END HEAD -->
 
-<body class="page-boxed page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo ">
+<body class="page-boxed page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo">
     <!-- BEGIN HEADER -->
     <uc1:Header ID="header" runat="server" />
     <!-- END HEADER -->
@@ -92,7 +92,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
                     <!-- BEGIN PAGE HEADER-->
-                    <h3 class="page-title">Blank Page <small>blank page</small>
+                    <h3 class="page-title"> <asp:Literal ID="litPageTitle" runat="server" /> <!-- <small>blank page</small> -->
                     </h3>
                     <asp:ContentPlaceHolder ID="Balloons" runat="server"></asp:ContentPlaceHolder>
                     <!-- END PAGE HEADER-->

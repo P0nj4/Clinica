@@ -7,7 +7,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat dashboard-stat-light blue-soft" href="#">
                 <div class="visual">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-users"></i>
                 </div>
                 <div class="details">
                     <div class="number">
@@ -22,7 +22,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat dashboard-stat-light red-soft" href="#">
                 <div class="visual">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-pie-chart"></i>
                 </div>
                 <div class="details">
                     <div class="number">
@@ -37,7 +37,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat dashboard-stat-light green-soft" href="#">
                 <div class="visual">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-usd"></i>
                 </div>
                 <div class="details">
                     <div class="number">
@@ -52,7 +52,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat dashboard-stat-light purple-soft" href="#">
                 <div class="visual">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-user-times"></i>
                 </div>
                 <div class="details">
                     <div class="number">
@@ -68,6 +68,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <!-- Proximas consultas -->
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
@@ -136,9 +137,9 @@
             </div>
         </div>
     </div>
+    <!-- fin Proximas consultas -->
 
-
-
+    <!-- Consultas pendientes -->
      <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
@@ -160,7 +161,7 @@
                             </th>
                             <th>Hora de la consulta
                             </th>
-                            <th>Minutos faltantes
+                            <th>Estado
                             </th>
                             <th>Acción
                             </th>
@@ -170,36 +171,36 @@
                         <tr>
                             <td>German Pereyra
                             </td>
-                            <td>12:00
+                            <td>Hoy las 12:00
                             </td>
                             <td>
-                                <span class="badge badge-danger">22</span>
+                                <span class="label label-danger">Muy demorado</span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
                             <td>Maite Pereyra
                             </td>
-                            <td>13:00
+                            <td>Hoy las 13:00
                             </td>
-                            <td><span class="badge badge-warning">45</span>
+                            <td><span class="label label-warning">Algo demorado</span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#">Cambiar estado</a>
                             </td>
                         </tr>
                         <tr>
                             <td>Leandro Pereyra
                             </td>
-                            <td>13:05
+                            <td>Hoy las 13:05
                             </td>
                             <td>
-                                <span class="badge badge-primary">120+ </span>
+                                <span class="label label-primary">Pendiente</span>
                             </td>
                             <td>
-                                <a href="#">Cancelar consulta</a>
+                                <a href="#">Cambiar estado</a>
                             </td>
                         </tr>
                     </tbody>
@@ -207,5 +208,6 @@
             </div>
         </div>
     </div>
+    <!-- fin Consultas pendientes -->
 </asp:Content>
 
