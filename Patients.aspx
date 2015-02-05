@@ -1,6 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Patients.aspx.cs" Inherits="Patients" MasterPageFile="~/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        #opciones .form-group {
+            margin-bottom:32px;
+        }
+        #opciones .form-group > label {
+            margin-top: 6px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="portlet box blue">
@@ -84,12 +92,12 @@
                             <td>11/12/1999
                             </td>
                             <td>
-                                <a href="#" class="btn btn-sm blue">Opciones
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>1
+                            <td>2
                             </td>
                             <td>Mirian Rodriguez
                             </td>
@@ -102,12 +110,12 @@
                             <td>01/04/2014
                             </td>
                             <td>
-                                <a href="#" class="btn btn-sm blue">Opciones
+                                 <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>1
+                            <td>3
                             </td>
                             <td>Federico Pereyra
                             </td>
@@ -137,23 +145,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Opciones</h4>
+                    <h4 class="modal-title">Selecciona una opci&oacute;n</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Default</label>
+                        <label class="control-label col-md-3">Opci&oacute;n</label>
                         <div class="col-md-9">
-                            <select class="bs-select form-control">
-                                <option>Mustard</option>
-                                <option>Ketchup</option>
-                                <option>Relish</option>
+                            <select class="bs-select form-control selectedOption">
+                                <option>Agendar consulta</option>
+                                <option>Editar</option>
+                                <option>Eliminar</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn blue">Aceptar</button>
+                    <button type="button" class="btn blue" onclick="doOptionAction()">Aceptar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -162,5 +170,33 @@
     </div>
 </asp:Content>
 <asp:Content ID="sss" ContentPlaceHolderID="scripts" runat="server">
+    <script type="text/javascript">
+        function doOptionAction() {
+            var selectedOption = $(".selectedOption option:selected").html();
+            if (selectedOption == "Eliminar") {
+                var r = confirm("Confirme que desea eliminar");
+                if (r == true) {
+                    $('#opciones').modal('toggle');
+
+                    Metronic.blockUI({
+                        boxed: true
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./handlers/UserUpdateHandler.ashx",
+                        data: { name: "John", time: "2pm" },
+                        success: function (data) {
+                            Metronic.unblockUI();
+                        }
+                    });
+                } else {
+                    txt = "You pressed Cancel!";
+                }
+            }
+        }
+
+        
+    </script>
 </asp:Content>
 
