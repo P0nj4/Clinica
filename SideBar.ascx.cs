@@ -23,6 +23,12 @@ public partial class SideBar : System.Web.UI.UserControl
             case "patients":
                 liPatients.Attributes["class"] = "active open";
                 break;
+            case "consults":
+                liConsults.Attributes["class"] = "active open";
+                break;
+            case "calendar":
+                liConsults.Attributes["class"] = "active open";
+                break;
         }
     }
 }
