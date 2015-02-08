@@ -1,5 +1,12 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Calendar.aspx.cs" Inherits="Calendar" %>
+<asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
+    <link href="assets/global/plugins/fullcalendar/fullcalendar.min.css" rel='stylesheet' />
+    <link href="assets/global/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' />
 
+    <!--
+<link href="./assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet"/>
+    -->
+</asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="portlet box green-meadow calendar">
 							<div class="portlet-title">
@@ -13,11 +20,9 @@
 										<!-- BEGIN DRAGGABLE EVENTS PORTLET-->
 										<h3 class="event-form-title">Draggable Events</h3>
 										<div id="external-events">
-											<form class="inline-form">
 												<input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title"/><br/>
 												<a href="javascript:;" id="event_add" class="btn default">
 												Add Event </a>
-											</form>
 											<hr/>
 											<div id="event_box">
 											</div>
@@ -39,8 +44,18 @@
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
+    
+<script src='../lib/moment.min.js'></script>
+<script src="assets/global/plugins/fullcalendar/lib/moment.min.js"></script>
+<script src="assets/global/plugins/fullcalendar/fullcalendar.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+            })
+        });
 
-    <script src="./assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
-<script src="./assets/admin/pages/scripts/calendar.js"></script>
+    </script>
 
 </asp:Content>
