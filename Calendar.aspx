@@ -8,7 +8,7 @@
     <link href="./assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
     <style>
         .fc-left {
-            left: 109px;
+            left: 250px;
             position: absolute;
         }
 
@@ -18,7 +18,7 @@
     <div class="portlet box green-meadow calendar">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Calendar
+                <i class="fa fa-gift"></i>Calendario de consultas
             </div>
         </div>
         <div class="portlet-body">
@@ -38,8 +38,7 @@
 
     <script src="assets/global/plugins/fullcalendar/lib/moment.min.js"></script>
     <script src="assets/global/plugins/fullcalendar/fullcalendar.js"></script>
-    <script type="text/javascript" src="./assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-    <script src="./assets/admin/pages/scripts/components-pickers.js"></script>
+    <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js" ></script>
 
     <script type="text/javascript">
 
@@ -61,6 +60,7 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
+                lang: 'es',
                 editable: true,
                 droppable: false, // this allows things to be dropped onto the calendar
                 drop: function () {
