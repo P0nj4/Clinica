@@ -13,7 +13,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         string pageName = this.Page.ToString().ToLower();
         pageName = pageName.Split('.')[1];
         pageName = pageName.Split('_')[0];
-        //body.Attributes.Add("class", pageName);
+        myBody.Attributes.Add("class", pageName + " " + "page-boxed page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo");
         
         litPageTitle.Text = Resources.Resource.ResourceManager.GetString("page_" + pageName);
     }

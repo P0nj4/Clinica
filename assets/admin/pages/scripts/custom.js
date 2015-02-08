@@ -1,33 +1,20 @@
-/**
-Custom module for you to write your own javascript functions
-**/
-var Custom = function () {
-
-    // private functions & variables
-
-    var myFunc = function(text) {
-        alert(text);
-    }
-
-    // public functions
-    return {
-
-        //main function
-        init: function () {
-            //initialize here something.            
-        },
-
-        //some helper function
-        doSomeStuff: function () {
-            myFunc();
+$(document).ready(function () {
+    oTable = $('.turnDataTable').DataTable({
+        "oLanguage": {
+            "oPaginate": {
+                "sFirst": "Primer página",
+                "sLast": "Última página",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "sEmptyTable": "No hay información para mostrar",
+            "sInfo": " Del _START_ al _END_ de un total de _TOTAL_ entradas",
+            "sInfoEmpty": "No nada para mostrar",
+            "sInfoFiltered": "- (Filtro sobre un total de _MAX_ entradas)",
+            "sLengthMenu": "Mostrar de a _MENU_ entradas"
         }
-
-    };
-
-}();
-
-/***
-Usage
-***/
-//Custom.init();
-//Custom.doSomeStuff();
+    });
+    $('#txtSearchField').keyup(function () {
+        oTable.search($(this).val()).draw();
+    })
+});

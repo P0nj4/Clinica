@@ -1,22 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Patients.aspx.cs" Inherits="Patients" MasterPageFile="~/MasterPage.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" />
-    <style>
-        #opciones .form-group {
-            margin-bottom: 32px;
-        }
-
-            #opciones .form-group > label {
-                margin-top: 6px;
-            }
-
-        #DataTables_Table_0_filter 
-        {
-            display:none;
-        }
-    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="portlet box blue">
@@ -66,7 +51,7 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table patientsTable">
+                <table class="table patientsTable turnDataTable">
                     <thead>
                         <tr>
                             <th>#
@@ -77,7 +62,7 @@
                             </th>
                             <th>Table heading
                             </th>
-                            <th>Table heading
+                            <th>Consultas
                             </th>
                             <th>Ultima consulta
                             </th>
@@ -91,11 +76,11 @@
                             </td>
                             <td>German Pereyra
                             </td>
-                            <td>31
+                            <td>30
                             </td>
                             <td>Table cell
                             </td>
-                            <td>Table cell
+                            <td>1
                             </td>
                             <td>11/12/1999
                             </td>
@@ -113,7 +98,7 @@
                             </td>
                             <td>Table cell
                             </td>
-                            <td>Table cell
+                            <td>7
                             </td>
                             <td>01/04/2014
                             </td>
@@ -131,7 +116,7 @@
                             </td>
                             <td>Table cell
                             </td>
-                            <td>Table cell
+                            <td>12
                             </td>
                             <td>10/12/2009
                             </td>
@@ -143,13 +128,121 @@
                         <tr>
                             <td>3
                             </td>
-                            <td>Federico Pereyra
+                            <td>Mauricio Lopez
+                            </td>
+                            <td>44
+                            </td>
+                            <td>Table cell
+                            </td>
+                            <td>2
+                            </td>
+                            <td>10/10/2007
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Rodrígo Gómez
+                            </td>
+                            <td>33
+                            </td>
+                            <td>Table cell
+                            </td>
+                            <td>2
+                            </td>
+                            <td>10/12/2012
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Florencia Ferrón
+                            </td>
+                            <td>18
+                            </td>
+                            <td>Table cell
+                            </td>
+                            <td>5
+                            </td>
+                            <td>05/01/2014
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Zuima Delgado
+                            </td>
+                            <td>81
+                            </td>
+                            <td>Table cell
+                            </td>
+                            <td>1
+                            </td>
+                            <td>07/05/2008
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Cecilia Boccio
                             </td>
                             <td>36
                             </td>
                             <td>Table cell
                             </td>
+                            <td>1
+                            </td>
+                            <td>10/04/2009
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Natalia Costa
+                            </td>
+                            <td>36
+                            </td>
                             <td>Table cell
+                            </td>
+                            <td>999999
+                            </td>
+                            <td>07/02/2015
+                            </td>
+                            <td>
+                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3
+                            </td>
+                            <td>Ulises Pereyra
+                            </td>
+                            <td>36
+                            </td>
+                            <td>Table cell
+                            </td>
+                            <td>8
                             </td>
                             <td>10/12/2009
                             </td>
@@ -161,123 +254,15 @@
                         <tr>
                             <td>3
                             </td>
-                            <td>Federico Pereyra
+                            <td>Roberto Rodríguez
                             </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
+                            <td>46
                             </td>
                             <td>Table cell
                             </td>
-                            <td>10/12/2009
+                            <td>4
                             </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>10/12/2009
+                            <td>10/01/2014
                             </td>
                             <td>
                                 <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
@@ -304,6 +289,7 @@
                         <label class="control-label col-md-3">Opci&oacute;n</label>
                         <div class="col-md-9">
                             <select class="bs-select form-control selectedOption">
+                                <option>Ver más información</option>
                                 <option>Agendar consulta</option>
                                 <option>Editar</option>
                                 <option>Eliminar</option>
@@ -322,31 +308,10 @@
     </div>
 </asp:Content>
 <asp:Content ID="sss" ContentPlaceHolderID="scripts" runat="server">
-    <<script src="./assets/global/plugins/jquery.dataTables.min.js" type="text/javascript"></script>
+    
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).ready(function () {
-                oTable = $('.patientsTable').DataTable({
-                    "oLanguage": {
-                        "oPaginate": {
-                            "sFirst": "Primer página",
-                            "sLast": "Última página",
-                            "sNext": "Siguiente",
-                            "sPrevious": "Anterior"
-                        },
-                        "sEmptyTable": "No hay información para mostrar",
-                        "sInfo": " Del _START_ al _END_ de un total de _TOTAL_ entradas",
-                        "sInfoEmpty": "No nada para mostrar",
-                        "sInfoFiltered": "- (Filtro sobre un total de _MAX_ entradas)",
-                        "sLengthMenu": "Mostrar de a _MENU_ entradas"
-                    }
-                });
-                $('#txtSearchField').keyup(function () {
-                    oTable.search($(this).val()).draw();
-                })
-            });
-        });
+        
 
         function doOptionAction() {
             var selectedOption = $(".selectedOption option:selected").html();
@@ -365,11 +330,12 @@
                         data: { name: "John", time: "2pm" },
                         success: function (data) {
                             Metronic.unblockUI();
+                            if (data.error) {
+                                alert(data.errorMessage);
+                            }
                         }
                     });
-                } else {
-                    txt = "You pressed Cancel!";
-                }
+                } 
             }
         }
 

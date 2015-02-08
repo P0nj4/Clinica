@@ -6,8 +6,10 @@ using System.Web;
 public class UserUpdateHandler : IHttpHandler {
     
     public void ProcessRequest (HttpContext context) {
-        context.Response.ContentType = "text/plain";
-        context.Response.Write("Hello World");
+        context.Response.ContentType = "application/json";
+        string result = "{\"error\":false, \"errorMessage\":\"Oups! Ocurrió un error. vuelva a intentarlo en unos minutos o llame al administrador del sistema\"}";
+
+        context.Response.Write(result);
         System.Threading.Thread.Sleep(2000);
     }
  

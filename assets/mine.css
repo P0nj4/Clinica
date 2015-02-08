@@ -1,0 +1,17 @@
+﻿#DataTables_Table_0_filter {
+    display: none;
+}
+
+/*Patients*/
+.patients #opciones .form-group {
+    margin-bottom: 32px;
+}
+
+.patients #opciones .form-group > label {
+        margin-top: 6px;
+}
+
+.patients .patientsTable td, .patientsTable th {
+    text-align: center;
+}
+/*End Patients*/
