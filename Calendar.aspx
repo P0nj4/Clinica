@@ -11,7 +11,6 @@
             left: 250px;
             position: absolute;
         }
-
     </style>
 </asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -32,15 +31,54 @@
         </div>
     </div>
 
+    <div class="modal fade" id="addConsult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Agendar consulta</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Extra Large</label>
+                                <div class="col-md-9">
+                                    <select id="ddlUsers" class="form-control select2me" data-placeholder="Select...">
+                                        <option value=""></option>
+                                        <option value="AL">Alabama</option>
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn blue" onclick="doOptionAction()">Aceptar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
 
     <script src="assets/global/plugins/fullcalendar/lib/moment.min.js"></script>
     <script src="assets/global/plugins/fullcalendar/fullcalendar.js"></script>
-    <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js" ></script>
+    <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js"></script>
+
+    <script type="text/javascript" src="./assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="./assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="./assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 
     <script type="text/javascript">
+
+        
 
         function addEvent() {
             var calendar = $('#calendar');
@@ -52,6 +90,10 @@
         }
 
         jQuery(document).ready(function () {
+            $('#ddlUsers').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
 
             // initiate layout and plugins
             $('#calendar').fullCalendar({
@@ -84,20 +126,12 @@
                     }
                 },
                 dayClick: function (date, jsEvent, view) {
-
-                    alert('Clicked on: ' + date.format());
-
-                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
+                    alert('Clicked on: ' + date.format('YYYY-MM-DD'));
                     alert('Current view: ' + view.name);
-
-                    // change the day's background color just for fun
                     $(this).css('background-color', 'red');
-
+                    $('#addConsult').modal('show');
                 }
-            })
-
-
+            });
         });
 
     </script>

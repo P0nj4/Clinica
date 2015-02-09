@@ -7,7 +7,7 @@ public class CalendarEvents : IHttpHandler {
     
     public void ProcessRequest (HttpContext context) {
         context.Response.ContentType = "application/json";
-        context.Response.Write("[{\"start\":  \"2014-11-06\", \"end\":  \"2014-11-08\", \"title\":\"GERMAN\" }, {\"start\":  \"2014-11-01\", \"end\":  \"2014-11-02\", \"title\":\"PEPE\" }]");
+        context.Response.Write("[{\"start\":  \"" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") + "\", \"end\":  \"" + DateTime.Now.AddHours(1).ToString("yyyy-MM-ddThh:mm:ss") + "\", \"title\":\"GERMAN\" }, {\"start\":  \"2014-11-01\", \"end\":  \"2014-11-02\", \"title\":\"PEPE\" }]");
         System.Diagnostics.Debug.WriteLine(context.Request["start"] + " " + context.Request["end"]);
     }
  
