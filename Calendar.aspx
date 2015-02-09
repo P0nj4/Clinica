@@ -45,19 +45,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Paciente</label>
                         <div class="col-md-9">
-                            <select class="form-control select2me" data-placeholder="Select...">
-                                <option value="01">German Pereyra</option>
-                                <option value="02">Maite Pereyra</option>
-                                <option value="03">Natalia Costa</option>
-                                <option value="04">Angelica Bilbao</option>
-                                <option value="05">Teresa Pereira</option>
-                                <option value="05">Rodrigo Herrera</option>
-                                <option value="05">Gonzalo Lopez</option>
-                                <option value="05">Ignacio Ferreira</option>
-                                <option value="05">Jorge Fernandez</option>
-                                <option value="05">German Fernandez</option>
-                            </select>
-
+                            <input type="hidden" id="select2_sample3" class="form-control select2">
                         </div>
                     </div>
 
@@ -96,6 +84,29 @@
         }
 
         jQuery(document).ready(function () {
+            
+            $("#select2_sample3").select2({
+                placeholder: "Select...",
+                allowClear: true,
+                minimumInputLength: 1,
+                query: function (query) {
+                    var data = {
+                        results: []
+                    }, i, j, s;
+                    for (i = 1; i < 5; i++) {
+                        s = "";
+                        for (j = 0; j < i; j++) {
+                            s = s + query.term;
+                        }
+                        data.results.push({
+                            id: query.term + i,
+                            text: s
+                        });
+                    }
+                    query.callback(data);
+                }
+            });
+
 
             // initiate layout and plugins
             $('#calendar').fullCalendar({

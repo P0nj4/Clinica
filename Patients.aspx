@@ -326,8 +326,8 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "./handlers/UserUpdateHandler.ashx",
-                        data: { name: "John", time: "2pm" },
+                        url: "./handlers/UserHandler.ashx",
+                        data: { method: "updateuser", time: "2pm" },
                         success: function (data) {
                             Metronic.unblockUI();
                             if (data.error) {
