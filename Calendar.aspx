@@ -4,8 +4,11 @@
     <link href="assets/global/plugins/fullcalendar/fullcalendar.min.css" rel='stylesheet' />
     <link href="assets/global/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print' />
 
-    <link type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="./assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+    <!-- Picker styles -->
+    <link rel="stylesheet" type="text/css" href="./assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/global/plugins/select2/select2.css">
+    <link rel="stylesheet" type="text/css" href="./assets/global/plugins/jquery-multi-select/css/multi-select.css">
+    <!-- End picker styles -->
     <style>
         .fc-left {
             left: 250px;
@@ -39,19 +42,25 @@
                     <h4 class="modal-title">Agendar consulta</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group">
-                                <label class="control-label col-md-3">Extra Large</label>
-                                <div class="col-md-9">
-                                    <select id="ddlUsers" class="form-control select2me" data-placeholder="Select...">
-                                        <option value=""></option>
-                                        <option value="AL">Alabama</option>
-                                        <option value="WY">Wyoming</option>
-                                    </select>
-                                </div>
-                            </div>
-                        
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Paciente</label>
+                        <div class="col-md-9">
+                            <select class="form-control select2me" data-placeholder="Select...">
+                                <option value="01">German Pereyra</option>
+                                <option value="02">Maite Pereyra</option>
+                                <option value="03">Natalia Costa</option>
+                                <option value="04">Angelica Bilbao</option>
+                                <option value="05">Teresa Pereira</option>
+                                <option value="05">Rodrigo Herrera</option>
+                                <option value="05">Gonzalo Lopez</option>
+                                <option value="05">Ignacio Ferreira</option>
+                                <option value="05">Jorge Fernandez</option>
+                                <option value="05">German Fernandez</option>
+                            </select>
+
+                        </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
@@ -62,8 +71,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
-
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -71,14 +78,13 @@
     <script src="assets/global/plugins/fullcalendar/lib/moment.min.js"></script>
     <script src="assets/global/plugins/fullcalendar/fullcalendar.js"></script>
     <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js"></script>
-
     <script type="text/javascript" src="./assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="./assets/global/plugins/select2/select2.min.js"></script>
-<script type="text/javascript" src="./assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="./assets/global/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="./assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 
     <script type="text/javascript">
 
-        
+
 
         function addEvent() {
             var calendar = $('#calendar');
@@ -90,10 +96,6 @@
         }
 
         jQuery(document).ready(function () {
-            $('#ddlUsers').select2({
-                placeholder: "Select an option",
-                allowClear: true
-            });
 
             // initiate layout and plugins
             $('#calendar').fullCalendar({

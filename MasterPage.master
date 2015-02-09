@@ -40,6 +40,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link rel="stylesheet" type="text/css" href="./assets/global/plugins/jstree/dist/themes/default/style.min.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link href="./assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
@@ -49,8 +51,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="./assets/admin/layout2/css/custom.css" rel="stylesheet" type="text/css" />
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    
 
 </head>
 <!-- END HEAD -->
@@ -147,6 +148,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="./assets/global/plugins/jstree/dist/jstree.min.js"></script>
+     <asp:ContentPlaceHolder ID="scripts" runat="server" />
     <!-- END PAGE LEVEL SCRIPTS -->
     <script src="./assets/admin/pages/scripts/ui-tree.js"></script>
     <script src="./assets/global/plugins/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -163,7 +165,7 @@ License: You must have a valid license purchased only from themeforest(the above
             UITree.init();
         });
     </script>
-    <asp:ContentPlaceHolder ID="scripts" runat="server" />
+   
     <!-- END JAVASCRIPTS -->
 </body>
 
