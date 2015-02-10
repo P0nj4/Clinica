@@ -69,7 +69,7 @@
                     dateEventAdded = true;
                     var evt = calendar.fullCalendar('renderEvent',{
                           id: 9999,
-                          title: 'Germán',
+                          title: decodeURI(gup('userName')),
                           start: date.format(),
                           end: dateString
                       },

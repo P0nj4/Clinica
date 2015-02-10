@@ -93,6 +93,7 @@
     </div>
     <input type="hidden" id="hidSelectedDate" />
     <input type="hidden" id="hidSelectedUserId" />
+    <input type="hidden" id="hidSelectedUserName" />
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -141,7 +142,7 @@
                 return false;
             }
 
-            window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val();
+            window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val() + '&userName=' + ($('#hidSelectedUserName').val());
         }
 
         jQuery(document).ready(function () {
@@ -160,6 +161,7 @@
 
             $('#select2_sample3').on("change", function (e) {
                 $('#hidSelectedUserId').val(e.val);
+                $('#hidSelectedUserName').val(e.added.text);
             });
 
 
