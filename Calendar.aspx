@@ -84,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn blue" onclick="doOptionAction()">Aceptar</button>
+                    <button type="button" class="btn blue" onclick="goToAddConsult()">Aceptar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -92,6 +92,7 @@
         <!-- /.modal-dialog -->
     </div>
     <input type="hidden" id="hidSelectedDate" />
+    <input type="hidden" id="hidSelectedUserId" />
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -130,6 +131,19 @@
             });
         }
 
+        function goToAddConsult() {
+            if ($('#hidSelectedDate').val().length == 0) {
+                alert('Seleccione una fecha para agendar la consulta');
+                return false;
+            }
+            if ($('#hidSelectedUserId').val().length == 0) {
+                alert('Seleccione un paciente para agendarle una consulta');
+                return false;
+            }
+
+            window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val();
+        }
+
         jQuery(document).ready(function () {
 
             $("#select2_sample3").select2({
@@ -143,6 +157,11 @@
                     makeCallToGetUserNames(query);
                 }
             });
+
+            $('#select2_sample3').on("change", function (e) {
+                $('#hidSelectedUserId').val(e.val);
+            });
+
 
             // initiate layout and plugins
             $('#calendar').fullCalendar({

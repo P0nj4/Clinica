@@ -11,14 +11,13 @@
             left: 250px;
             position: absolute;
         }
-
     </style>
 </asp:Content>
 
 <asp:Content ID="content" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
 
     <div id="calendar" class="has-toolbar">
-                    </div>
+    </div>
 </asp:Content>
 
 
@@ -26,7 +25,7 @@
 
     <script src="assets/global/plugins/fullcalendar/lib/moment.min.js"></script>
     <script src="assets/global/plugins/fullcalendar/fullcalendar.js"></script>
-    <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js" ></script>
+    <script type="text/javascript" src="assets/global/plugins/fullcalendar/lang-all.js"></script>
 
     <script type="text/javascript">
 
@@ -38,10 +37,12 @@
                          start: '2014-11-01'
                      }]);
         }
-
+        var dateEventAdded = false;
         jQuery(document).ready(function () {
-            $('#calendar').fullCalendar({
+
+            var calendar = $('#calendar').fullCalendar({
                 lang: 'es',
+                defaultDate: $.fullCalendar.moment(gup('selectedDate')),
                 editable: true,
                 droppable: false, // this allows things to be dropped onto the calendar
                 eventSources: {
@@ -58,9 +59,22 @@
                     }
                 },
                 dayClick: function (date, jsEvent, view) {
-                    alert('Clicked on: ' + date.format('YYYY-MM-DD'));
-                    alert('Current view: ' + view.name);
-                    $(this).css('background-color', 'red');
+                    d2 = new Date(date);
+                    d2.setHours(d2.getHours() + 3);
+                    var dateString = d2.format("yyyy-mm-dd\'T\'HH:MM:ss");
+                    if (dateEventAdded) {
+                        //calendar.fullCalendar('removeEvents'["9999"]);
+                        calendar.fullCalendar('removeEvents', "9999");
+                    }
+                    dateEventAdded = true;
+                    var evt = calendar.fullCalendar('renderEvent',{
+                          id: 9999,
+                          title: 'Germán',
+                          start: date.format(),
+                          end: dateString
+                      },
+                      true);
+                    //alert(evt[0]._id);
                 },
                 defaultView: 'agendaDay'
             });
