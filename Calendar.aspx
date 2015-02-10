@@ -18,6 +18,11 @@
         #addConsult .row .last {
             margin-bottom: 17px;
         }
+
+        td {
+            -webkit-animation: myfirst 5s; /* Chrome, Safari, Opera */
+            animation: myfirst 5s;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -78,7 +83,7 @@
                     </div> -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn default" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn blue" onclick="doOptionAction()">Aceptar</button>
                 </div>
             </div>
@@ -86,6 +91,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <input type="hidden" id="hidSelectedDate" />
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -103,55 +109,40 @@
 
         function addEvent() {
             var calendar = $('#calendar');
-            calendar.fullCalendar('addEventSource', [
-                     {
-                         title: 'Germán',
-                         start: '2014-11-01'
-                     }]);
+            calendar.fullCalendar('addEventSource',
+            [{
+                title: 'Germán',
+                start: '2014-11-01'
+            }]);
+        }
+
+        function makeCallToGetUserNames(query) {
+            $.ajax({
+                type: "POST",
+                url: "/handlers/UserHandler.ashx",
+                data: { method: "getusernames", "query": query.term },
+                success: function (data) {
+                    query.callback(data);
+                }, error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
         }
 
         jQuery(document).ready(function () {
 
             $("#select2_sample3").select2({
-                placeholder: "Select...",
+                placeholder: "Seleccionar...",
+                formatSearching: function () { return "Buscando..."; },
+                formatNoMatches: function () { return "No hay resultados"; },
+                formatInputTooShort: function (input, min) { return "Introduzca un caracter o mas para poder iniciar la búsqueda"; },
                 allowClear: true,
                 minimumInputLength: 1,
                 query: function (query) {
-                    
-                    var data = {
-                        results: []
-                    }, i, j, s;
-                    for (i = 1; i < 5; i++) {
-                        s = "";
-                        for (j = 0; j < i; j++) {
-                            s = s + query.term;
-                        }
-                        data.results.push({
-                            id: query.term + i,
-                            text: s
-                        });
-                    }
-                    //query.callback(data);
-                    makeCall(query);
-                    
+                    makeCallToGetUserNames(query);
                 }
             });
-
-            function makeCall(query) {
-                $.ajax({
-                    type: "POST",
-                    url: "/handlers/UserHandler.ashx",
-                    data: { method: "getusernames", "query": query.term },
-                    success: function (data) {
-                        query.callback(data);
-                    }, error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        alert(err.Message);
-                    }
-                });
-
-            }
-
 
             // initiate layout and plugins
             $('#calendar').fullCalendar({
@@ -184,10 +175,13 @@
                     }
                 },
                 dayClick: function (date, jsEvent, view) {
-                    $('#lblSelectedDate').val(date.format('YYYY-MM-DD'));
-                    //alert('Clicked on: ' + date.format('YYYY-MM-DD'));
-                    //alert('Current view: ' + view.name);
-                    $(this).css('background-color', 'red');
+                    $('#hidSelectedDate').val(date.format('YYYY-MM-DD'));
+                    $('#lblSelectedDate').html(date.format('DD/MM/YYYY'));
+                    //$(this).css('background-color', 'red');
+                    $(this).stop().animate({ backgroundColor: '#1BBC9B' }, 300, function () {
+                        // Animation complete.
+                        $(this).stop().animate({ backgroundColor: 'white' }, 500);
+                    });
                     $('#addConsult').modal('show');
                 }
             });
