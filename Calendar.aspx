@@ -23,8 +23,13 @@
             -webkit-animation: myfirst 5s; /* Chrome, Safari, Opera */
             animation: myfirst 5s;
         }
+        .fc-time {
+            margin-right:5px;
+        }
     </style>
 </asp:Content>
+<asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
+ </asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="portlet box green-meadow calendar">
         <div class="portlet-title">
@@ -107,17 +112,9 @@
 
     <script type="text/javascript">
 
+        var addConsultAvailable = (gup('addConsultAvailable') == '1');
 
-
-        function addEvent() {
-            var calendar = $('#calendar');
-            calendar.fullCalendar('addEventSource',
-            [{
-                title: 'Germán',
-                start: '2014-11-01'
-            }]);
-        }
-
+        //Obtiene los nombres de los pacientes para mostrarlos en un dropdown para el ingreso de una nueva consulta
         function makeCallToGetUserNames(query) {
             $.ajax({
                 type: "POST",
@@ -132,17 +129,19 @@
             });
         }
 
+        //redirecciona a la página de agregar consulta
         function goToAddConsult() {
-            if ($('#hidSelectedDate').val().length == 0) {
-                alert('Seleccione una fecha para agendar la consulta');
-                return false;
+            if (addConsultAvailable) { 
+                 if ($('#hidSelectedDate').val().length == 0) {
+                     alert('Seleccione una fecha para agendar la consulta');
+                     return false;
+                 }
+                 if ($('#hidSelectedUserId').val().length == 0) {
+                     alert('Seleccione un paciente para agendarle una consulta');
+                     return false;
+                 }
+                 window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val() + '&userName=' + ($('#hidSelectedUserName').val());
             }
-            if ($('#hidSelectedUserId').val().length == 0) {
-                alert('Seleccione un paciente para agendarle una consulta');
-                return false;
-            }
-
-            window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val() + '&userName=' + ($('#hidSelectedUserName').val());
         }
 
         jQuery(document).ready(function () {
@@ -196,14 +195,19 @@
                     }
                 },
                 dayClick: function (date, jsEvent, view) {
-                    $('#hidSelectedDate').val(date.format('YYYY-MM-DD'));
-                    $('#lblSelectedDate').html(date.format('DD/MM/YYYY'));
-                    //$(this).css('background-color', 'red');
-                    $(this).stop().animate({ backgroundColor: '#1BBC9B' }, 300, function () {
-                        // Animation complete.
-                        $(this).stop().animate({ backgroundColor: 'white' }, 500);
-                    });
-                    $('#addConsult').modal('show');
+                    if (addConsultAvailable) {
+                        $('#hidSelectedDate').val(date.format('YYYY-MM-DD'));
+                        $('#lblSelectedDate').html(date.format('DD/MM/YYYY'));
+                        //$(this).css('background-color', 'red');
+                        $(this).stop().animate({ backgroundColor: '#1BBC9B' }, 300, function () {
+                            // Animation complete.
+                            $(this).stop().animate({ backgroundColor: 'white' }, 500);
+                        });
+                        $('#addConsult').modal('show');
+                    }
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    alert('Event: ' + calEvent.title + calEvent._id);
                 }
             });
         });

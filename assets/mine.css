@@ -2,6 +2,17 @@
     display: none;
 }
 
+.page-sidebar-menu li.twoLines i {
+    float:left;
+}
+
+.page-sidebar-menu li.twoLines p {
+    display: block;
+    width: 84%;
+    float: left;
+    margin-left: 3px;
+}
+
 /*Patients*/
 .patients #opciones .form-group {
     margin-bottom: 32px;
