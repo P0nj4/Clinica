@@ -86,52 +86,40 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Paciente
+                            <th>ID
                             </th>
                             <th>Hora de la consulta
                             </th>
-                            <th>Minutos faltantes
+                            <th>Nombre
+                            </th>
+                            <th>Teléfono
                             </th>
                             <th>Acción
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>German Pereyra
-                            </td>
-                            <td>12:00
-                            </td>
-                            <td>
-                                <span class="badge badge-danger">22</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maite Pereyra
-                            </td>
-                            <td>13:00
-                            </td>
-                            <td><span class="badge badge-warning">45</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Leandro Pereyra
-                            </td>
-                            <td>13:05
-                            </td>
-                            <td>
-                                <span class="badge badge-primary">120+ </span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
+                        <asp:Repeater ID="rptConsults" runat="server" OnItemDataBound="rptConsults_OnItemDataBound">
+                            <ItemTemplate>
+                                <tr>
+                                    <td>
+                                        <asp:Literal ID="litId" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litHour" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litName" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litPhone" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litAction" runat="server" />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </tbody>
                 </table>
             </div>
@@ -139,76 +127,6 @@
     </div>
     <!-- fin Proximas consultas -->
 
-    <!-- Consultas pendientes -->
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="fa fa-list"></i>Consultas sujetas a cambio de estado
-            </div>
-            <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
-                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""></a>
-                <a href="javascript:;" class="reload" data-original-title="" title=""></a>
-                <a href="javascript:;" class="remove" data-original-title="" title=""></a>
-            </div>
-        </div>
-        <div class="portlet-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Paciente
-                            </th>
-                            <th>Hora de la consulta
-                            </th>
-                            <th>Estado
-                            </th>
-                            <th>Acción
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>German Pereyra
-                            </td>
-                            <td>Hoy las 12:00
-                            </td>
-                            <td>
-                                <span class="label label-danger">Muy demorado</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maite Pereyra
-                            </td>
-                            <td>Hoy las 13:00
-                            </td>
-                            <td><span class="label label-warning">Algo demorado</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Leandro Pereyra
-                            </td>
-                            <td>Hoy las 13:05
-                            </td>
-                            <td>
-                                <span class="label label-primary">Pendiente</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- fin Consultas pendientes -->
 
 
     <div class="modal fade bs-modal-sm" id="change-status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
