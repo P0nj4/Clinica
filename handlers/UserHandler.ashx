@@ -33,6 +33,13 @@ public class UserHandler : IHttpHandler
                         matches.Add(pAux);
                     }
                 }
+
+                if (query.Length > 0) {
+                    Patient emptyPatient = new Patient();
+                    emptyPatient.name = "Nuevo";
+                    emptyPatient.lastName = "Paciente";
+                    matches.Insert(0, emptyPatient);
+                }
                 
                 result = "{\"results\":[";
                 bool isTheFirst = true;

@@ -30,4 +30,8 @@ public class Patient
         this.birthPlace = birthPlace;
         this.referred = referred;
 	}
+
+    public Patient() { 
+    
+    }
 }
