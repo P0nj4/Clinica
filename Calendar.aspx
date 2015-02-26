@@ -65,27 +65,16 @@
                         </div>
                         <div class="col-md-12 last">
                             <label class="control-label col-md-3">Paciente</label>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="hidden" id="select2_sample3" class="form-control select2">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn blue" onclick="goToAddConsult()">Nuevo paciente</button>
                             </div>
                         </div>
                     </div>
                     <div class="clearfix" />
 
-                    <!--<div class="form-body">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Fecha</label>
-                            <div class="col-md-9">
-                                <label id="lblSelectedDate"></label>
-                            </div>
-                        </div>
-                        <div class="form-group last">
-                            <label class="control-label col-md-3">Paciente</label>
-                            <div class="col-md-9">
-                                <input type="hidden" id="select2_sample3" class="form-control select2">
-                            </div>
-                        </div> 
-                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn default" data-dismiss="modal">Cancelar</button>
@@ -112,7 +101,7 @@
 
     <script type="text/javascript">
 
-        var addConsultAvailable = (gup('addConsultAvailable') == '1');
+        var addConsultAvailable = true; // (gup('addConsultAvailable') == '1');
 
         //Obtiene los nombres de los pacientes para mostrarlos en un dropdown para el ingreso de una nueva consulta
         function makeCallToGetUserNames(query) {

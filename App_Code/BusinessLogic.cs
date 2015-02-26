@@ -2,19 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Summary description for BusinessLogic
 /// </summary>
 public class BusinessLogic
 {
-    public static List<Patient> dummyGetAllPatients()
+    private static SqlConnection _myConnection;
+    private static List<Patient> patients;
+    private static DateTime lastPatientsUpdate;
+
+    private static SqlConnection myConnection
     {
-        List<Patient> patients = new List<Patient>();
-        for (int i = 0; i < 10; i++)
+        //set the person name
+        set { _myConnection = value; }
+        //get the person name 
+        get
         {
-            Patient aux = new Patient("Nombre" + i, "Apellido" + i, "Email" + i, "Tel" + i, "Descripcion" + i, new DateTime(), "Montevideo, Uruguay", "Facebook");
-            patients.Add(aux);
+            if (_myConnection == null)
+                _myConnection = new SqlConnection("Data Source=SQL5014.Smarterasp.net;Initial Catalog=DB_9BBA1B_Clinic;User Id=DB_9BBA1B_Clinic_admin;Password=polv0r1t4;");
+            return _myConnection;
+        }
+    }
+
+    public static List<Patient> getAllPatients()
+    {
+        TimeSpan span = (DateTime.Now - lastPatientsUpdate);
+        bool needsUpdate = (patients == null || span.Minutes > 3);
+        if (!needsUpdate)
+            return patients;
+        try
+        {
+            patients = new List<Patient>();
+            myConnection.Open();
+            SqlDataReader myReader = null;
+            SqlCommand myCommand = new SqlCommand("select * from Patients", myConnection);
+            myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                Patient aux = new Patient(myReader["name"].ToString(), myReader["lastName"].ToString(), myReader["email"].ToString(), myReader["phone"].ToString(), myReader["description"].ToString(), (DateTime)myReader["birthDate"], myReader["birthPlace"].ToString(), myReader["referred"].ToString());
+                aux.id = (int)myReader["id"];
+                patients.Add(aux);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally {
+            myConnection.Close();
         }
         return patients;
     }
@@ -30,9 +67,9 @@ public class BusinessLogic
         return users;
     }
 
-    public static List<Consult> dummyGetTodayConsults() {
+    public static List<Consult> getTodayConsults() {
         List<Consult> consults = new List<Consult>();
-        List<Patient> patients = BusinessLogic.dummyGetAllPatients();
+        List<Patient> patients = BusinessLogic.getAllPatients();
         User user = dummyGetAllUsers()[0];
         for (int i = 0; i < 10; i++) {
             Consult aux = new Consult();

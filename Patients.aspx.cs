@@ -9,6 +9,29 @@ public partial class Patients : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        rptPatients.DataSource = BusinessLogic.getAllPatients();
+        rptPatients.DataBind();
+    }
 
+    protected void rptPatients_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            Patient patient = (Patient)e.Item.DataItem;
+            Literal litId = (Literal)e.Item.FindControl("litId");
+            litId.Text = patient.id.ToString();
+            Literal litName = (Literal)e.Item.FindControl("litName");
+            litName.Text = patient.name + " " + patient.lastName;
+            Literal litAge = (Literal)e.Item.FindControl("litAge");
+            DateTime today = DateTime.Today;
+            int age = today.Year - patient.birthday.Year;
+            if (patient.birthday > today.AddYears(-age)) age--;
+            litAge.Text = age.ToString();
+
+            Literal litPhone = (Literal)e.Item.FindControl("litPhone");
+            litPhone.Text = patient.phone;
+            Literal litLastConsult = (Literal)e.Item.FindControl("litLastConsult");
+            litLastConsult.Text = (patient.lastConsult != null ? patient.lastConsult.ToString("dd/MM/yyyy") : "Nunca");
+        }
     }
 }

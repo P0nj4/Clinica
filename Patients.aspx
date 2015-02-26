@@ -60,9 +60,7 @@
                             </th>
                             <th>Edad
                             </th>
-                            <th>Table heading
-                            </th>
-                            <th>Consultas
+                            <th>Phone
                             </th>
                             <th>Ultima consulta
                             </th>
@@ -71,204 +69,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1
-                            </td>
-                            <td>German Pereyra
-                            </td>
-                            <td>30
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>1
-                            </td>
-                            <td>11/12/1999
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2
-                            </td>
-                            <td>Mirian Rodriguez
-                            </td>
-                            <td>51
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>7
-                            </td>
-                            <td>01/04/2014
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Federico Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>12
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Mauricio Lopez
-                            </td>
-                            <td>44
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>2
-                            </td>
-                            <td>10/10/2007
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Rodrígo Gómez
-                            </td>
-                            <td>33
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>2
-                            </td>
-                            <td>10/12/2012
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Florencia Ferrón
-                            </td>
-                            <td>18
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>5
-                            </td>
-                            <td>05/01/2014
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Zuima Delgado
-                            </td>
-                            <td>81
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>1
-                            </td>
-                            <td>07/05/2008
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Cecilia Boccio
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>1
-                            </td>
-                            <td>10/04/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Natalia Costa
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>999999
-                            </td>
-                            <td>07/02/2015
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Ulises Pereyra
-                            </td>
-                            <td>36
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>8
-                            </td>
-                            <td>10/12/2009
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3
-                            </td>
-                            <td>Roberto Rodríguez
-                            </td>
-                            <td>46
-                            </td>
-                            <td>Table cell
-                            </td>
-                            <td>4
-                            </td>
-                            <td>10/01/2014
-                            </td>
-                            <td>
-                                <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                </a>
-                            </td>
-                        </tr>
+                        <asp:Repeater ID="rptPatients" runat="server" OnItemDataBound="rptPatients_OnItemDataBound">
+                            <ItemTemplate>
+                                <tr>
+                                    <td><asp:Literal ID="litId" runat="server"></asp:Literal>
+                                    </td>
+                                    <td><asp:Literal ID="litName" runat="server"></asp:Literal>
+                                    </td>
+                                    <td><asp:Literal ID="litAge" runat="server"></asp:Literal>
+                                    </td>
+                                    <td><asp:Literal ID="litPhone" runat="server"></asp:Literal>
+                                    </td>
+                                    <td><asp:Literal ID="litLastConsult" runat="server"></asp:Literal>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
+                                        </a>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        
                     </tbody>
                 </table>
             </div>

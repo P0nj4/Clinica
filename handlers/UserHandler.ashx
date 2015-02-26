@@ -24,32 +24,31 @@ public class UserHandler : IHttpHandler
                 break;
             case "getusernames":
                 string query = context.Request.Params["query"].ToLower();
-                string[] names = new string[] { "Gonzalo G[ahan", "Zackary Zygmont", "Gerriú Gibbon", "Joana Jeanpierre", "Ana Aguinaldo", "Lorenzo Leider", "Luz Lust", "Wava Winningham", "Latosha Lakin", "Doug Demmer", "Sallie Siddiqui", "Asia Alegria", "Torrie Tsang", "Augustina Arispe", "Sheree Searles", "Ezra Earhart", "Erma Epling", "Julissa Judah", "Sandra Stelter", "Keri Kingsland", "Dominque Derouin", "Shakira Segalla", "Bennett Barbaro", "Donnette Devane", "Emerson Ertle", "Freddie Ferra", "Zandra Zamor", "Randa Repass", "Augustus Alcock", "Sharla Solis", "Quiana Qualls", "Rhea Riddles", "Yukiko Yoo", "Hannelore Heaton", "Lala Labelle", "Margarette Mclellan", "Dallas Dimattia", "Leana Larrison", "Janiece Joubert", "Magali Marquart", "Marjory Mixon", "Farah Farrelly", "Galina Greenburg", "Elvera Everett", "Elroy Esterline", "Demetrice Dressler", "Lashandra Lent", "Ling Leavell", "Micheline Morace", "Rudy Riccio" };
-                //{"results":[{"id":"h1","text":"h"},{"id":"h2","text":"hh"},{"id":"h3","text":"hhh"},{"id":"h4","text":"hhhh"}]}
-                List<String> matches = new List<string>();
-                foreach (string name in names) {
-                    if (name.ToLower().Contains(query)) {
-                        matches.Add(name);
+                
+                List<Patient> matches = new List<Patient>();
+                List<Patient> patients = BusinessLogic.getAllPatients();
+                foreach (Patient pAux in patients)
+                {
+                    if (pAux.name.ToLower().Contains(query)) {
+                        matches.Add(pAux);
                     }
                 }
                 
                 result = "{\"results\":[";
                 bool isTheFirst = true;
                 int i = 1;
-                foreach (string match in matches) {
+                foreach (Patient match in matches) {
                     if (!isTheFirst) {
                         result += ",";
                     }
                     isTheFirst = false;
-                    result += "{\"id\":\"" + i + "\",\"text\":\"" + match +"\"}";
+                    result += "{\"id\":\"" + match.id + "\",\"text\":\"" + match.name + " " + match.lastName + "\"}";
                     i++;
                 }
                 result += "]}";
                 break;
         }
-
         context.Response.Write(result);
-        System.Threading.Thread.Sleep(1000);
     }
     
     public bool IsReusable

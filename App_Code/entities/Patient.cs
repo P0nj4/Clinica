@@ -18,6 +18,7 @@ public class Patient
     public string birthPlace { get; set; }
     public double lastPrice { get; set; }
     public string referred { get; set; }
+    public DateTime lastConsult { get; set; }
 
 	public Patient(string name, string lastName, string email, string phone, string description, DateTime birhday, string birthPlace, string referred) {
         this.name = name;
