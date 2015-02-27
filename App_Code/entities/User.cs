@@ -24,7 +24,7 @@ public class User
 	
     public User(SqlDataReader r)
 	{
-        if (r["patientId"] != null)
+        if (Utilities.HasColumn(r, "patientId"))
         {
             this.id = (int)r["patientId"];
         }

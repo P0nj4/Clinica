@@ -48,7 +48,7 @@ public class Patient
         this.birthday = (DateTime)myReader["birthDate"];
         this.birthPlace = myReader["birthPlace"].ToString();
         this.referred = myReader["referred"].ToString();
-        if (myReader["patientId"] != DBNull.Value)
+        if (Utilities.HasColumn(myReader, "patientId"))
         {
             this.id = (int)myReader["patientId"];
         }
