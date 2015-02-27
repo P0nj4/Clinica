@@ -78,7 +78,9 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="submit" class="btn green"><i class="fa fa-check"></i>Submit</button>
+                            <asp:Button CssClass="btn green" ID="btnSubmit" runat="server" Text="Guardar" OnClick="btnSubmit_Click" >
+                              
+                            </asp:Button>
                             <button type="button" class="btn default">Cancel</button>
                         </div>
                     </div>
