@@ -94,7 +94,7 @@
     <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript" ></script>
     
     <script type="text/javascript">
-        $('.birthDay').datetimepicker();
+        $('.birthDay').datetimepicker({ 'format': 'mm/dd/yyyy hh:ii P' });
     </script>
 
 </asp:Content>
