@@ -73,8 +73,11 @@
 
                             <label class="control-label col-md-3">Hora</label>
                             <div class="col-md-9">
-                                <input id="timepicker1" type="text" class="input-small">
-                                <span class="add-on"><i class="fa fa-clock-o"></i></span>
+                                Desde
+                                <input id="timepickerFrom" type="text" class="input-small">
+                                Hasta
+                                <input id="timepickerTo" type="text" class="input-small">
+                                
                             </div>
                         </div>
 
@@ -84,6 +87,7 @@
                                 <input type="hidden" id="select2_sample3" class="form-control select2">
                             </div>
                         </div>
+
                     </div>
                     <div class="clearfix" />
 
@@ -151,7 +155,19 @@
         }
 
         jQuery(document).ready(function () {
-            var timePicker = $('#timepicker1').timepicker({'showMeridian': true});
+            var timePickerFrom = $('#timepickerFrom').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+                console.log('The time is ' + e.time.value);
+                console.log('The hour is ' + e.time.hour);
+                console.log('The minute is ' + e.time.minute);
+                console.log('The meridian is ' + e.time.meridian);
+            });
+
+            var timePickerTo = $('#timepickerTo').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+                console.log('The time is ' + e.time.value);
+                console.log('The hour is ' + e.time.hour);
+                console.log('The minute is ' + e.time.minute);
+                console.log('The meridian is ' + e.time.meridian);
+            });
 
             $("#select2_sample3").select2({
                 placeholder: "Seleccionar...",
@@ -213,7 +229,17 @@
                         } else {
                             dateTimeAux = dateTimeAux + ' AM';
                         }
-                        timePicker.timepicker('setTime', dateTimeAux);
+                        d2.setHours(d2.getHours() + 3);
+                        dateTimeToAux = d2.format('hh:MM');
+                        if (d2.getHours() >= 12) {
+                            dateTimeToAux = dateTimeToAux + ' PM';
+                        } else {
+                            dateTimeToAux = dateTimeToAux + ' AM';
+                        }
+
+                        timePickerFrom.timepicker('setTime', dateTimeAux);
+                        timePickerTo.timepicker('setTime', dateTimeToAux);
+
                         //$('#timepicker1').val(date.format("'HH:MM:ss"));
                         //$(this).css('background-color', 'red');
                         $(this).stop().animate({ backgroundColor: '#1BBC9B' }, 300, function () {
