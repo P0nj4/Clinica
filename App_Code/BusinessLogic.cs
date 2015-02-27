@@ -86,7 +86,7 @@ public class BusinessLogic
         catch (Exception e)
         {
             Console.WriteLine(e.ToString());
-        }
+          }
         finally
         {
             myConnection.Close();
@@ -100,7 +100,7 @@ public class BusinessLogic
         {
             myConnection.Open();
             SqlDataReader r = null;
-            SqlCommand myCommand = new SqlCommand("select * from Users where email = @email and password = @password", myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Users", myConnection);
 
             SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
             pEmail.Value = email;
