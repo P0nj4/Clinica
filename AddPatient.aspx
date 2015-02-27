@@ -92,8 +92,17 @@
 
     <script src="./assets/admin/pages/scripts/components-form-tools.js"></script>
     <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript" ></script>
-    
     <script type="text/javascript">
+        $.fn.datetimepicker.dates['en'] = {
+            days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+            daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+            daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+            months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            today: "Hoy",
+            suffix: [],
+            meridiem: []
+        };
         $('.birthDay').datetimepicker({ 'format': 'mm/dd/yyyy hh:ii P' });
     </script>
 
