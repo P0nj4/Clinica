@@ -9,6 +9,6 @@ public partial class Header : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        litUserName.Text = ((User)this.Session["loggedUser"]).name;
     }
 }

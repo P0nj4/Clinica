@@ -403,7 +403,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle" src="../../assets/admin/layout2/img/avatar3_small.jpg"/>
                                     <span class="username username-hide-on-mobile">
-                                        Nick </span>
+                                        <asp:Literal ID="litUserName" runat="server" /> </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">

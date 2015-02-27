@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 /// <summary>
 /// Summary description for BusinessLogic
@@ -41,8 +44,7 @@ public class BusinessLogic
             myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
-                Patient aux = new Patient(myReader["name"].ToString(), myReader["lastName"].ToString(), myReader["email"].ToString(), myReader["phone"].ToString(), myReader["description"].ToString(), (DateTime)myReader["birthDate"], myReader["birthPlace"].ToString(), myReader["referred"].ToString());
-                aux.id = (int)myReader["id"];
+                Patient aux = new Patient(myReader);
                 patients.Add(aux);
             }
         }
@@ -69,22 +71,80 @@ public class BusinessLogic
 
     public static List<Consult> getTodayConsults() {
         List<Consult> consults = new List<Consult>();
-        List<Patient> patients = BusinessLogic.getAllPatients();
-        User user = dummyGetAllUsers()[0];
-        for (int i = 0; i < 10; i++) {
-            Consult aux = new Consult();
-            aux.patient = patients[i];
-            aux.price = 2500;
-            aux.id = i;
-            aux.assignedTo = user;
-            aux.startDate = DateTime.Now.AddHours(i);
-            aux.startDate = DateTime.Now.AddHours(i+1);
-            consults.Add(aux);
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.id = c.patientId) inner join Users u on (u.id = c.assignedTo) where c.startDate >= '" + DateTime.Now.ToString("yyyy-MM-dd") + "' and c.startDate <= '" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") +"'" , myConnection);
+            r = myCommand.ExecuteReader();
+            while (r.Read())
+            {
+                Consult c = new Consult(r);
+                consults.Add(c);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
         }
         return consults;
     }
-    public BusinessLogic()
-    {
 
+    public static User login(string email, string password) {
+        User response = null;
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select * from Users where email = @email and password = @password", myConnection);
+
+            SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
+            pEmail.Value = email;
+
+            SqlParameter pPassword = new SqlParameter("@password", System.Data.SqlDbType.NVarChar);
+            pPassword.Value = CalculateMD5Hash(password);
+            Debug.WriteLine(pPassword.Value);
+
+            myCommand.Parameters.Add(pEmail);
+            myCommand.Parameters.Add(pPassword);
+
+            r = myCommand.ExecuteReader();
+            if (r.Read())
+            {
+                response = new User();
+                response.id = (int)r["id"];
+                response.lastName = r["lastName"].ToString();
+                response.name = r["name"].ToString();
+                response.clinicId = (int)r["clinicId"];
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.ToString());
+        }
+        finally {
+            myConnection.Close();
+        }
+        return response;
+    }
+
+    public static string CalculateMD5Hash(string input)
+    {
+        // step 1, calculate MD5 hash from input
+        MD5 md5 = System.Security.Cryptography.MD5.Create();
+        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+        byte[] hash = md5.ComputeHash(inputBytes);
+
+        // step 2, convert byte array to hex string
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("X2"));
+        }
+        return sb.ToString();
     }
 }

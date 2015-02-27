@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page
+public partial class _Default : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,7 +23,7 @@ public partial class _Default : System.Web.UI.Page
             Literal litHour = (Literal)e.Item.FindControl("litHour");
             litHour.Text = consult.startDate.ToString("HH:mm");
             Literal litName = (Literal)e.Item.FindControl("litName");
-            litName.Text = consult.patient.name;
+            litName.Text = consult.patient.fullName;
             Literal litPhone = (Literal)e.Item.FindControl("litPhone");
             litPhone.Text = consult.patient.phone;
             Literal litAction = (Literal)e.Item.FindControl("litAction");

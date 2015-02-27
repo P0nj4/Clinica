@@ -72,7 +72,7 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-list"></i>Proximas consultas
+                <i class="fa fa-list"></i>Consultas del d&iacute;a
             </div>
             <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
