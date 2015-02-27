@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/global/plugins/select2/select2.css">
     <link rel="stylesheet" type="text/css" href="./assets/global/plugins/jquery-multi-select/css/multi-select.css">
+    <link rel="stylesheet" type="text/css" href="./assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <!-- End picker styles -->
     <style>
         .fc-left {
@@ -23,13 +24,18 @@
             -webkit-animation: myfirst 5s; /* Chrome, Safari, Opera */
             animation: myfirst 5s;
         }
+
         .fc-time {
-            margin-right:5px;
+            margin-right: 5px;
+        }
+
+        .select2-results li.select2-result-selectable:first-child {
+            font-weight: bold;
         }
     </style>
 </asp:Content>
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
- </asp:Content>
+</asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="portlet box green-meadow calendar">
         <div class="portlet-title">
@@ -63,15 +69,25 @@
                                 <label id="lblSelectedDate">asdasd</label>
                             </div>
                         </div>
-                        <div class="col-md-12 last">
-                            <label class="control-label col-md-3">Paciente</label>
-                            <div class="col-md-6">
-                                <input type="hidden" id="select2_sample3" class="form-control select2">
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn blue" onclick="goToAddConsult()">Nuevo paciente</button>
+                        <div class="col-md-12">
+
+                            <label class="control-label col-md-3">Hora</label>
+                            <div class="col-md-9">
+                                Desde
+                                <input id="timepickerFrom" type="text" class="input-small">
+                                Hasta
+                                <input id="timepickerTo" type="text" class="input-small">
+                                
                             </div>
                         </div>
+
+                        <div class="col-md-12 last">
+                            <label class="control-label col-md-3">Paciente</label>
+                            <div class="col-md-9">
+                                <input type="hidden" id="select2_sample3" class="form-control select2">
+                            </div>
+                        </div>
+
                     </div>
                     <div class="clearfix" />
 
@@ -99,6 +115,9 @@
     <script type="text/javascript" src="./assets/global/plugins/select2/select2.min.js"></script>
     <script type="text/javascript" src="./assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 
+    <script type="text/javascript" src="./assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="./assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
     <script type="text/javascript">
 
         var addConsultAvailable = true; // (gup('addConsultAvailable') == '1');
@@ -120,20 +139,35 @@
 
         //redirecciona a la página de agregar consulta
         function goToAddConsult() {
-            if (addConsultAvailable) { 
-                 if ($('#hidSelectedDate').val().length == 0) {
-                     alert('Seleccione una fecha para agendar la consulta');
-                     return false;
-                 }
-                 if ($('#hidSelectedUserId').val().length == 0) {
-                     alert('Seleccione un paciente para agendarle una consulta');
-                     return false;
-                 }
-                 window.location = '/AddEditConsult.aspx?selectedDate=' + $('#hidSelectedDate').val() + '&userId=' + $('#hidSelectedUserId').val() + '&userName=' + ($('#hidSelectedUserName').val());
+            if (addConsultAvailable) {
+                selectedDate = 'none';
+                if ($('#hidSelectedDate').val().length != 0) {
+                    selectedDate = $('#hidSelectedDate').val();
+                }
+                userid = 0;
+                userName = 'none';
+                if ($('#hidSelectedUserId').val().length != 0) {
+                    userid = $('#hidSelectedUserId').val();
+                    userName = $('#hidSelectedUserName').val();
+                }
+                window.location = '/AddEditConsult.aspx?selectedDate=' + selectedDate + '&userId=' + userid + '&userName=' + userName;
             }
         }
 
         jQuery(document).ready(function () {
+            var timePickerFrom = $('#timepickerFrom').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+                console.log('The time is ' + e.time.value);
+                console.log('The hour is ' + e.time.hour);
+                console.log('The minute is ' + e.time.minute);
+                console.log('The meridian is ' + e.time.meridian);
+            });
+
+            var timePickerTo = $('#timepickerTo').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+                console.log('The time is ' + e.time.value);
+                console.log('The hour is ' + e.time.hour);
+                console.log('The minute is ' + e.time.minute);
+                console.log('The meridian is ' + e.time.meridian);
+            });
 
             $("#select2_sample3").select2({
                 placeholder: "Seleccionar...",
@@ -170,6 +204,7 @@
                     $(this).remove();
                     //}
                 },
+                defaultView: 'agendaWeek',
                 eventSources: {
                     url: '/handlers/CalendarEvents.ashx',
                     error: function (data) {
@@ -187,6 +222,25 @@
                     if (addConsultAvailable) {
                         $('#hidSelectedDate').val(date.format('YYYY-MM-DD'));
                         $('#lblSelectedDate').html(date.format('DD/MM/YYYY'));
+                        dateTimeAux = date.format('hh:mm');
+                        d2 = new Date(date);
+                        if (d2.getHours() >= 12) {
+                            dateTimeAux = dateTimeAux + ' PM';
+                        } else {
+                            dateTimeAux = dateTimeAux + ' AM';
+                        }
+                        d2.setHours(d2.getHours() + 3);
+                        dateTimeToAux = d2.format('hh:MM');
+                        if (d2.getHours() >= 12) {
+                            dateTimeToAux = dateTimeToAux + ' PM';
+                        } else {
+                            dateTimeToAux = dateTimeToAux + ' AM';
+                        }
+
+                        timePickerFrom.timepicker('setTime', dateTimeAux);
+                        timePickerTo.timepicker('setTime', dateTimeToAux);
+
+                        //$('#timepicker1').val(date.format("'HH:MM:ss"));
                         //$(this).css('background-color', 'red');
                         $(this).stop().animate({ backgroundColor: '#1BBC9B' }, 300, function () {
                             // Animation complete.

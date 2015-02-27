@@ -61,9 +61,8 @@
                 dayClick: function (date, jsEvent, view) {
                     d2 = new Date(date);
                     d2.setHours(d2.getHours() + 3);
-                    var dateString = d2.format("yyyy-mm-dd\'T\'HH:MM:ss");
+                    var dateString = d2.format("yyyy-mm-dd\'T\'HH:mm:ss");
                     if (dateEventAdded) {
-                        //calendar.fullCalendar('removeEvents'["9999"]);
                         calendar.fullCalendar('removeEvents', "9999");
                     }
                     dateEventAdded = true;
@@ -74,7 +73,6 @@
                           end: dateString
                       },
                       true);
-                    //alert(evt[0]._id);
                 },
                 defaultView: 'agendaDay'
             });

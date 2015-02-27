@@ -43,22 +43,26 @@ public class Patient
     {
         this.name = myReader["name"].ToString();
         this.lastName = myReader["lastName"].ToString();
-        this.email =myReader["email"].ToString(); this.phone = myReader["phone"].ToString();
+        this.email = myReader["email"].ToString(); this.phone = myReader["phone"].ToString();
         this.description = myReader["description"].ToString();
         this.birthday = (DateTime)myReader["birthDate"];
         this.birthPlace = myReader["birthPlace"].ToString();
         this.referred = myReader["referred"].ToString();
-        if (myReader["patientId"] != DBNull.Value )
+        if (myReader["patientId"] != DBNull.Value)
         {
             this.id = (int)myReader["patientId"];
         }
-        else {
+        else
+        {
             this.id = (int)myReader["id"];
         }
-        
+
         if (myReader["lastConsultDate"] != DBNull.Value)
         {
             this.lastConsult = (DateTime)myReader["lastConsultDate"];
         }
+    }
+    public Patient() { 
+    
     }
 }
