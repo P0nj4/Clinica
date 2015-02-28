@@ -32,6 +32,17 @@
         .select2-results li.select2-result-selectable:first-child {
             font-weight: bold;
         }
+
+        textarea {
+            width: 100%;
+            border: 1px solid #e5e5e5;
+        }
+
+        .input-small {
+            margin: 7px 0 10px 0;
+            height: 34px;
+            border: 1px solid #e5e5e5;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
@@ -77,7 +88,6 @@
                                 <input id="timepickerFrom" type="text" class="input-small">
                                 Hasta
                                 <input id="timepickerTo" type="text" class="input-small">
-                                
                             </div>
                         </div>
 
@@ -85,6 +95,13 @@
                             <label class="control-label col-md-3">Paciente</label>
                             <div class="col-md-9">
                                 <input type="hidden" id="select2_sample3" class="form-control select2">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 last">
+                            <label class="control-label col-md-3">Diagnostico</label>
+                            <div class="col-md-9">
+                                <asp:TextBox ID="txtDiagnostic" runat="server" TextMode="MultiLine" />
                             </div>
                         </div>
 
