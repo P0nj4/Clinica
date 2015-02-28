@@ -4,6 +4,8 @@
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    
+    <input type="hidden" id="hidActionUserId" class="hidActionUserId"/>
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
@@ -83,8 +85,7 @@
                                     <td><asp:Literal ID="litLastConsult" runat="server"></asp:Literal>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm blue" data-toggle="modal" href="#opciones">Opciones
-                                        </a>
+                                        <asp:Literal ID="litButtonOptions" runat="server"></asp:Literal>
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -130,8 +131,7 @@
 </asp:Content>
 <asp:Content ID="sss" ContentPlaceHolderID="scripts" runat="server">
     
-
-    <script type="text/javascript">
+ <script type="text/javascript">
         
 
         function doOptionAction() {
@@ -158,6 +158,20 @@
                     });
                 } 
             }
+            if (selectedOption == "Editar") {
+                window.location.assign("AddPatient.aspx?userId=" + $(".hidActionUserId").val());
+            }
+            
+        }
+
+        $(document).ready(function () {
+            $(".options").click(function () {
+                setUserIdForAction($(this).attr('userId'));
+            });
+        });
+
+        function setUserIdForAction(id) {
+            $(".hidActionUserId").val(id);
         }
 
 

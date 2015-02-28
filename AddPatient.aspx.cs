@@ -9,7 +9,26 @@ public partial class AddPatient : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (this.Request.Params["userId"] != null)
+        {
+            if (!this.IsPostBack)
+            {
+                int userId = int.Parse(this.Request.Params["userId"]);
+                if (userId > 0)
+                {
+                    Patient pat = BusinessLogic.getPatient(userId);
+                    this.txtBirhPlace.Text = pat.birthPlace;
+                    this.txtBirthTime.Text = pat.birthday.ToString("hh:mm");
+                    this.txtDate.Text = pat.birthday.ToString("dd/MM/yyyy");
+                    this.txtDescription.Text = pat.description;
+                    this.txtEmail.Text = pat.email;
+                    this.txtLastName.Text = pat.lastName;
+                    this.txtName.Text = pat.name;
+                    this.txtPhone.Text = pat.phone;
+                    this.txtRefered.Text = pat.referred;
+                }
+            }
+        }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
@@ -35,8 +54,23 @@ public partial class AddPatient : BasePage
         p.name = txtName.Text;
         p.phone = txtPhone.Text;
         p.referred = txtRefered.Text;
-
-        BusinessLogic.insertPatient(p, this.loggedUser.clinicId);
+        if (this.Request.Params["userId"] != null)
+        {
+            int userId = int.Parse(this.Request.Params["userId"]);
+            if (userId > 0)
+            {
+                p.id = userId;
+                BusinessLogic.updatePatient(p);
+            }
+            else
+            {
+                BusinessLogic.insertPatient(p, this.loggedUser.clinicId);
+            }
+        }
+        else
+        {
+            BusinessLogic.insertPatient(p, this.loggedUser.clinicId);
+        }
 
         Response.Redirect("Patients.aspx");
     }

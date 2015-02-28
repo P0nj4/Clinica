@@ -65,4 +65,38 @@ public class Patient
     public Patient() { 
     
     }
+
+    public static void addDBParametersFromPatient(Patient p, SqlCommand myCommand) {
+        SqlParameter pName = new SqlParameter("@name", System.Data.SqlDbType.NVarChar);
+        pName.Value = p.name;
+        myCommand.Parameters.Add(pName);
+
+        SqlParameter pLastName = new SqlParameter("@lastName", System.Data.SqlDbType.NVarChar);
+        pLastName.Value = p.lastName;
+        myCommand.Parameters.Add(pLastName);
+
+        SqlParameter pPhone = new SqlParameter("@phone", System.Data.SqlDbType.NVarChar);
+        pPhone.Value = p.phone;
+        myCommand.Parameters.Add(pPhone);
+
+        SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
+        pEmail.Value = p.email;
+        myCommand.Parameters.Add(pEmail);
+
+        SqlParameter pdescription = new SqlParameter("@description", System.Data.SqlDbType.NVarChar);
+        pdescription.Value = p.description;
+        myCommand.Parameters.Add(pdescription);
+
+        SqlParameter birthplace = new SqlParameter("@birthplace", System.Data.SqlDbType.NVarChar);
+        birthplace.Value = p.birthPlace;
+        myCommand.Parameters.Add(birthplace);
+
+        SqlParameter pbirthday = new SqlParameter("@birthDate", System.Data.SqlDbType.DateTime);
+        pbirthday.Value = p.birthday;
+        myCommand.Parameters.Add(pbirthday);
+
+        SqlParameter refered = new SqlParameter("@referred", System.Data.SqlDbType.NVarChar);
+        refered.Value = p.referred;
+        myCommand.Parameters.Add(refered);
+    }
 }

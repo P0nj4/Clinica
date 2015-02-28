@@ -107,40 +107,47 @@
     <script src="assets/global/plugins/jquery-validation/js/localization/messages_es.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        $.fn.datepicker.dates['en'] = {
-            days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
-            daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-            daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
-            months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-            monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-            today: "Hoy",
-            suffix: [],
-            meridiem: []
-        };
-        $('.birthDay').datepicker({ 'format': 'dd/mm/yyyy' });
-        $('.birthTime').timepicker({'showMeridian': false, 'minuteStep': 5});
 
-        $("#form1").validate();
+        $(document).ready(function () {
+            //Time picker
+            $.fn.datepicker.dates['en'] = {
+                days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+                daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+                daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                today: "Hoy",
+                suffix: [],
+                meridiem: []
+            };
+            $('.birthDay').datepicker({ 'format': 'dd/mm/yyyy' });
+            $('.birthTime').timepicker({ 'showMeridian': false, 'minuteStep': 5 });
 
-        $.validator.addMethod("myDate", function (value, element) {
-            return this.optional(element) || /(((0[1-9]|[12][0-9]|3[01])([/])(0[13578]|10|12)([/])(\d{4}))|(([0][1-9]|[12][0-9]|30)([/])(0[469]|11)([/])(\d{4}))|((0[1-9]|1[0-9]|2[0-8])([/])(02)([/])(\d{4}))|((29)(\.|-|\/)(02)([/])([02468][048]00))|((29)([/])(02)([/])([13579][26]00))|((29)([/])(02)([/])([0-9][0-9][0][48]))|((29)([/])(02)([/])([0-9][0-9][2468][048]))|((29)([/])(02)([/])([0-9][0-9][13579][26])))/i.test(value);
-        }, "Ingrese una fecha válida.");
+            //Validation
+            $("#form1").validate();
 
-        $.validator.addMethod("time", function (value, element) {
-            return this.optional(element) || /^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])$$/i.test(value);
-        }, "Ingrese una hora válida.");
+            $.validator.addMethod("myDate", function (value, element) {
+                return this.optional(element) || /(((0[1-9]|[12][0-9]|3[01])([/])(0[13578]|10|12)([/])(\d{4}))|(([0][1-9]|[12][0-9]|30)([/])(0[469]|11)([/])(\d{4}))|((0[1-9]|1[0-9]|2[0-8])([/])(02)([/])(\d{4}))|((29)(\.|-|\/)(02)([/])([02468][048]00))|((29)([/])(02)([/])([13579][26]00))|((29)([/])(02)([/])([0-9][0-9][0][48]))|((29)([/])(02)([/])([0-9][0-9][2468][048]))|((29)([/])(02)([/])([0-9][0-9][13579][26])))/i.test(value);
+            }, "Ingrese una fecha válida.");
 
-        $(".birthDay").rules("add", {
-            myDate: true
+            $.validator.addMethod("time", function (value, element) {
+                return this.optional(element) || /^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])$$/i.test(value);
+            }, "Ingrese una hora válida.");
+
+            $(".birthDay").rules("add", {
+                myDate: true
+            });
+
+            $(".birthTime").rules("add", {
+                time: true
+            });
+
+            $("#ContentPlaceHolder1_txtEmail").rules("add", {
+                email: true
+            });
         });
 
-        $(".birthTime").rules("add", {
-            time: true
-        });
-
-        $("#ContentPlaceHolder1_txtEmail").rules("add", {
-            email: true
-        });
+        
     </script>
 
 </asp:Content>

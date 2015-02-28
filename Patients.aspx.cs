@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Patients : System.Web.UI.Page
+public partial class Patients : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,6 +32,9 @@ public partial class Patients : System.Web.UI.Page
             litPhone.Text = patient.phone;
             Literal litLastConsult = (Literal)e.Item.FindControl("litLastConsult");
             litLastConsult.Text = (patient.lastConsult != null ? patient.lastConsult.ToString("dd/MM/yyyy") : "Nunca");
+            Literal litButtonOptions = (Literal)e.Item.FindControl("litButtonOptions");
+            litButtonOptions.Text = "<a class=\"btn btn-sm blue options\" data-toggle=\"modal\" href=\"#opciones\" userId=" + patient.id + " >Opciones</a>";
+
         }
     }
 }

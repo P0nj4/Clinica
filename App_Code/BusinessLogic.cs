@@ -28,6 +28,8 @@ public class BusinessLogic
             return _myConnection;
         }
     }
+
+
     #region Patients
     public static List<Patient> getAllPatients()
     {
@@ -58,45 +60,71 @@ public class BusinessLogic
         return patients;
     }
 
+    public static Patient getPatient(int id)
+    {
+        Patient result = null;
+        try
+        {
+            myConnection.Open();
+            SqlDataReader myReader = null;
+            SqlCommand myCommand = new SqlCommand("select * from Patients where id = @id", myConnection);
+            SqlParameter param = new SqlParameter("@id", System.Data.SqlDbType.Int);
+            param.Value = id;
+            myCommand.Parameters.Add(param);
+
+            myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                result = new Patient(myReader);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return result;
+    }
+
+    public static void updatePatient(Patient p)
+    {
+        SqlCommand myCommand = new SqlCommand("Update Patients set name = @name, lastName = @lastName, phone = @phone, email = @email, description = @description, birthDate = @birthDate, birthPlace = @birthPlace, referred = @referred Where id = @id" , myConnection);
+
+        Patient.addDBParametersFromPatient(p, myCommand);
+
+        SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.NVarChar);
+        pid.Value = p.id;
+        myCommand.Parameters.Add(pid);
+
+        try
+        {
+            myConnection.Open();
+            int i = myCommand.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+    }
+
     public static void insertPatient(Patient p, int clinicId)
     {
         SqlCommand myCommand = new SqlCommand("INSERT INTO Patients (name, lastName, phone, email, description, birthDate, birthPlace, referred, clinicId) " +
                                      "Values (@name, @lastName, @phone, @email, @description, @birthDate, @birthPlace, @referred, @clinicId)", myConnection);
-        SqlParameter pName = new SqlParameter("@name", System.Data.SqlDbType.NVarChar);
-        pName.Value = p.name;
-        myCommand.Parameters.Add(pName);
 
-        SqlParameter pLastName = new SqlParameter("@lastName", System.Data.SqlDbType.NVarChar);
-        pLastName.Value = p.lastName;
-        myCommand.Parameters.Add(pLastName);
-
-        SqlParameter pPhone = new SqlParameter("@phone", System.Data.SqlDbType.NVarChar);
-        pPhone.Value = p.phone;
-        myCommand.Parameters.Add(pPhone);
-
-        SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
-        pEmail.Value = p.email;
-        myCommand.Parameters.Add(pEmail);
-
-        SqlParameter pdescription = new SqlParameter("@description", System.Data.SqlDbType.NVarChar);
-        pdescription.Value = p.description;
-        myCommand.Parameters.Add(pdescription);
-
-        SqlParameter birthplace = new SqlParameter("@birthplace", System.Data.SqlDbType.NVarChar);
-        birthplace.Value = p.birthPlace;
-        myCommand.Parameters.Add(birthplace);
-
-        SqlParameter pbirthday = new SqlParameter("@birthDate", System.Data.SqlDbType.DateTime);
-        pbirthday.Value = p.birthday;
-        myCommand.Parameters.Add(pbirthday);
-
-        SqlParameter refered = new SqlParameter("@referred", System.Data.SqlDbType.NVarChar);
-        refered.Value = p.description;
-        myCommand.Parameters.Add(refered);
+        Patient.addDBParametersFromPatient(p, myCommand);
 
         SqlParameter pclinicId = new SqlParameter("@clinicId", System.Data.SqlDbType.NVarChar);
         pclinicId.Value = clinicId;
         myCommand.Parameters.Add(pclinicId);
+
         try
         {
             myConnection.Open();
