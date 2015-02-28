@@ -28,7 +28,7 @@ public class BusinessLogic
             return _myConnection;
         }
     }
-
+    #region Patients
     public static List<Patient> getAllPatients()
     {
         TimeSpan span = (DateTime.Now - lastPatientsUpdate);
@@ -58,16 +58,61 @@ public class BusinessLogic
         return patients;
     }
 
-    public static List<User> dummyGetAllUsers()
+    public static void insertPatient(Patient p, int clinicId)
     {
-        List<User> users = new List<User>();
-        User aux = new User();
-        aux.name = "Mirian";
-        aux.lastName = "Rodríguez";
-        aux.id = 1;
-        users.Add(aux);
-        return users;
+        SqlCommand myCommand = new SqlCommand("INSERT INTO Patients (name, lastName, phone, email, description, birthDate, birthPlace, referred, clinicId) " +
+                                     "Values (@name, @lastName, @phone, @email, @description, @birthDate, @birthPlace, @referred, @clinicId)", myConnection);
+        SqlParameter pName = new SqlParameter("@name", System.Data.SqlDbType.NVarChar);
+        pName.Value = p.name;
+        myCommand.Parameters.Add(pName);
+
+        SqlParameter pLastName = new SqlParameter("@lastName", System.Data.SqlDbType.NVarChar);
+        pLastName.Value = p.lastName;
+        myCommand.Parameters.Add(pLastName);
+
+        SqlParameter pPhone = new SqlParameter("@phone", System.Data.SqlDbType.NVarChar);
+        pPhone.Value = p.phone;
+        myCommand.Parameters.Add(pPhone);
+
+        SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
+        pEmail.Value = p.email;
+        myCommand.Parameters.Add(pEmail);
+
+        SqlParameter pdescription = new SqlParameter("@description", System.Data.SqlDbType.NVarChar);
+        pdescription.Value = p.description;
+        myCommand.Parameters.Add(pdescription);
+
+        SqlParameter birthplace = new SqlParameter("@birthplace", System.Data.SqlDbType.NVarChar);
+        birthplace.Value = p.birthPlace;
+        myCommand.Parameters.Add(birthplace);
+
+        SqlParameter pbirthday = new SqlParameter("@birthDate", System.Data.SqlDbType.DateTime);
+        pbirthday.Value = p.birthday;
+        myCommand.Parameters.Add(pbirthday);
+
+        SqlParameter refered = new SqlParameter("@referred", System.Data.SqlDbType.NVarChar);
+        refered.Value = p.description;
+        myCommand.Parameters.Add(refered);
+
+        SqlParameter pclinicId = new SqlParameter("@clinicId", System.Data.SqlDbType.NVarChar);
+        pclinicId.Value = clinicId;
+        myCommand.Parameters.Add(pclinicId);
+        try
+        {
+            myConnection.Open();
+            myCommand.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            myConnection.Close();
+        }
     }
+
+    #endregion
 
     public static List<Consult> getTodayConsults() {
         List<Consult> consults = new List<Consult>();
@@ -148,39 +193,4 @@ public class BusinessLogic
         return sb.ToString();
     }
 
-    public static void insertPatient(Patient p) {
-        SqlCommand myCommand = new SqlCommand("INSERT INTO Patient (name, lastName, phone, email, description, birthday, birthplace, refered) " +
-                                     "Values (@name, @lastName, @phone, @email, @description, @birthDate, @birthPlace, @refered)", myConnection);
-        SqlParameter pName = new SqlParameter("@name", System.Data.SqlDbType.NVarChar);
-        pName.Value = p.name;
-        myCommand.Parameters.Add(pName);
-
-        SqlParameter pLastName = new SqlParameter("@lastName", System.Data.SqlDbType.NVarChar);
-        pLastName.Value = p.lastName;
-        myCommand.Parameters.Add(pLastName);
-
-        SqlParameter pPhone = new SqlParameter("@phone", System.Data.SqlDbType.NVarChar);
-        pPhone.Value = p.phone;
-        myCommand.Parameters.Add(pPhone);
-
-        SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
-        pEmail.Value = p.email;
-        myCommand.Parameters.Add(pEmail);
-
-        SqlParameter pdescription = new SqlParameter("@description", System.Data.SqlDbType.NVarChar);
-        pdescription.Value = p.description;
-        myCommand.Parameters.Add(pdescription);
-
-        SqlParameter birthplace = new SqlParameter("@birthplace", System.Data.SqlDbType.NVarChar);
-        birthplace.Value = p.birthPlace;
-        myCommand.Parameters.Add(birthplace);
-
-        SqlParameter pbirthday = new SqlParameter("@birthday", System.Data.SqlDbType.DateTime);
-        pbirthday.Value = p.birthday;
-        myCommand.Parameters.Add(pbirthday);
-
-        SqlParameter refered = new SqlParameter("@refered", System.Data.SqlDbType.NVarChar);
-        refered.Value = p.description;
-        myCommand.Parameters.Add(refered);
-    }
 }

@@ -25,4 +25,9 @@
 .patients .patientsTable td, .patientsTable th {
     text-align: center;
 }
+
+.error {
+    color:red;
+    font-size:12px;
+}
 /*End Patients*/
