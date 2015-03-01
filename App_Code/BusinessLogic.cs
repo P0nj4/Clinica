@@ -142,6 +142,7 @@ public class BusinessLogic
 
     #endregion
 
+    #region Consult
     public static List<Consult> getTodayConsults() {
         List<Consult> consults = new List<Consult>();
         try
@@ -166,6 +167,31 @@ public class BusinessLogic
         }
         return consults;
     }
+
+    public static void insertConsult(Consult c)
+    {
+        SqlCommand myCommand = new SqlCommand("INSERT INTO Consults (startDate, endDate, price, diagnostic, scheduler, patientId, assignedTo) " +
+                                     "Values (@startDate, @endDate, @price, @diagnostic, @scheduler, @patientId, @assignedTo)", myConnection);
+
+        Consult.addDBParametersFromConsult(c, myCommand);
+        
+        try
+        {
+            myConnection.Open();
+            myCommand.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+    }
+    
+    #endregion
+
 
     public static User login(string email, string password) {
         User response = null;

@@ -63,7 +63,7 @@ public class Consult
         comm.Parameters.Add(price);
 
         SqlParameter patient = new SqlParameter("@patientId", System.Data.SqlDbType.Int);
-        patient.Value = c.patient;
+        patient.Value = c.patient.id;
         comm.Parameters.Add(patient);
 
         SqlParameter diagnostic = new SqlParameter("@diagnostic", System.Data.SqlDbType.Text);
@@ -103,6 +103,13 @@ public class Consult
             assignedTo.Value = c.assignedTo.id;
             comm.Parameters.Add(assignedTo);
         }
+        if (c.scheduler != null)
+        {
+            SqlParameter scheduler = new SqlParameter("@scheduler", System.Data.SqlDbType.Int);
+            scheduler.Value = c.scheduler.id;
+            comm.Parameters.Add(scheduler);
+        }
+        
 
 
     }
