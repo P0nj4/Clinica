@@ -48,6 +48,7 @@
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
 </asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Button ID="btnSubmitConsult" CssClass="btnSubmitConsult" runat="server" Text="submit" style="display:none;" OnClick="btnSubmitConsult_Click" />
     <div class="portlet box green-meadow calendar">
         <div class="portlet-title">
             <div class="caption">
@@ -81,23 +82,27 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-
                             <label class="control-label col-md-3">Hora</label>
                             <div class="col-md-9">
                                 Desde
-                                <input id="timepickerFrom" type="text" class="input-small">
+                                <input id="timepickerFrom" runat="server" type="text" class="timepickerFrom input-small">
                                 Hasta
-                                <input id="timepickerTo" type="text" class="input-small">
+                                <input id="timepickerTo" runat="server"  type="text" class="timepickerTo input-small">
                             </div>
                         </div>
 
-                        <div class="col-md-12 last">
+                        <div class="col-md-12">
                             <label class="control-label col-md-3">Paciente</label>
                             <div class="col-md-9">
                                 <input type="hidden" id="select2_sample3" class="form-control select2">
                             </div>
                         </div>
-
+                        <div class="col-md-12">
+                            <label class="control-label col-md-3">Precio</label>
+                            <div class="col-md-9">
+                                <asp:TextBox ID="txtPrice" runat="server" CssClass="input-small" />
+                            </div>
+                        </div>
                         <div class="col-md-12 last">
                             <label class="control-label col-md-3">Diagnostico</label>
                             <div class="col-md-9">
@@ -118,9 +123,9 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <input type="hidden" id="hidSelectedDate" />
-    <input type="hidden" id="hidSelectedUserId" />
-    <input type="hidden" id="hidSelectedUserName" />
+    <input type="hidden" id="hidSelectedDate" runat="server" class="hidSelectedDate" />
+    <input type="hidden" id="hidSelectedUserId" runat="server" class="hidSelectedUserId" />
+    <input type="hidden" id="hidSelectedUserName" runat="server" class="hidSelectedUserName" />
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -158,28 +163,32 @@
         function goToAddConsult() {
             if (addConsultAvailable) {
                 selectedDate = 'none';
-                if ($('#hidSelectedDate').val().length != 0) {
-                    selectedDate = $('#hidSelectedDate').val();
+                if ($('.hidSelectedDate').val().length != 0) {
+                    selectedDate = $('.hidSelectedDate').val();
                 }
                 userid = 0;
                 userName = 'none';
-                if ($('#hidSelectedUserId').val().length != 0) {
-                    userid = $('#hidSelectedUserId').val();
-                    userName = $('#hidSelectedUserName').val();
+                if ($('.hidSelectedUserId').val().length != 0) {
+                    userid = $('.hidSelectedUserId').val();
+                    userName = $('.hidSelectedUserName').val();
                 }
-                window.location = '/AddEditConsult.aspx?selectedDate=' + selectedDate + '&userId=' + userid + '&userName=' + userName;
+                if (userid && selectedDate) {
+                    $(".btnSubmitConsult").click();
+                }
+
+                //window.location = '/AddEditConsult.aspx?selectedDate=' + selectedDate + '&userId=' + userid + '&userName=' + userName;
             }
         }
 
         jQuery(document).ready(function () {
-            var timePickerFrom = $('#timepickerFrom').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+            var timePickerFrom = $('.timepickerFrom').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
                 console.log('The time is ' + e.time.value);
                 console.log('The hour is ' + e.time.hour);
                 console.log('The minute is ' + e.time.minute);
                 console.log('The meridian is ' + e.time.meridian);
             });
 
-            var timePickerTo = $('#timepickerTo').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+            var timePickerTo = $('.timepickerTo').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
                 console.log('The time is ' + e.time.value);
                 console.log('The hour is ' + e.time.hour);
                 console.log('The minute is ' + e.time.minute);
@@ -199,8 +208,8 @@
             });
 
             $('#select2_sample3').on("change", function (e) {
-                $('#hidSelectedUserId').val(e.val);
-                $('#hidSelectedUserName').val(e.added.text);
+                $('.hidSelectedUserId').val(e.val);
+                $('.hidSelectedUserName').val(e.added.text);
             });
 
 
@@ -237,7 +246,7 @@
                 },
                 dayClick: function (date, jsEvent, view) {
                     if (addConsultAvailable) {
-                        $('#hidSelectedDate').val(date.format('YYYY-MM-DD'));
+                        $('.hidSelectedDate').val(date.format('YYYY-MM-DD'));
                         $('#lblSelectedDate').html(date.format('DD/MM/YYYY'));
                         dateTimeAux = date.format('hh:mm');
                         d2 = new Date(date);
