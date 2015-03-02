@@ -6,6 +6,13 @@
     <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.min.css" />
 
    <link rel="stylesheet" type="text/css" href="assets/mine.css" />
+    <style>
+        .hidden {
+            display:none;
+        }
+
+
+    </style>
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Balloons" Runat="Server">
@@ -90,15 +97,14 @@
                             <asp:TextBox ID="txtPropusal" CssClass="form-control" TextMode="MultiLine" runat="server" />
                         </div>
                     </div>
-                   
                 </div>
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
-                            <asp:Button CssClass="btn red" ID="btnCancel" runat="server" Text="Cancelar Consulta" OnClick="btnCancel_Click" />
-                            <asp:Button CssClass="btn green" ID="btnSubmit" runat="server" Text="Guardar Cambios" OnClick="btnSubmit_Click" >
+                            <asp:Button CssClass="btn red btnCancel" ID="btnCancel" runat="server" Text="Cancelar Consulta" OnClick="btnCancel_Click" />
+                            <asp:Button CssClass="btn green btnSubmit" ID="btnSubmit" runat="server" Text="Guardar Cambios" OnClick="btnSubmit_Click" >
                             </asp:Button>
-                             <asp:Button CssClass="btn default" ID="btnDiscard" runat="server" Text="Volver" />
+                             <a class="btn default edit">Editar</a>
                         </div>
                     </div>
                 </div>
@@ -114,10 +120,13 @@
     <script src="assets/global/plugins/jquery-validation/js/localization/messages_es.min.js" type="text/javascript"></script>
 
     <script src="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
-
+    <script src="assets/mine.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            makeNotEditable();
+
             //Time picker
             $.fn.datepicker.dates['en'] = {
                 days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],

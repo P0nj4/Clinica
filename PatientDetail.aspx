@@ -161,10 +161,12 @@
     <script src="assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/global/plugins/jquery-validation/js/localization/messages_es.min.js" type="text/javascript"></script>
-
+    <script src="assets/mine.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+            makeNotEditable();
+
             //Time picker
             $.fn.datepicker.dates['en'] = {
                 days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],

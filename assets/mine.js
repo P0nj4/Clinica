@@ -13,7 +13,36 @@ Date.prototype.addHours = function(h) {
    return this;   
 }
 
+function makeNotEditable() {
+    if (gup('edit') != 1) {
+        $('.btnCancel').hide();
+        $('.btnSubmit').hide();
+        $('.edit').click(function () {
+            window.location.href = window.location.href + '&edit=1';
+        });
 
+        $('form .portlet-body input[type=text]').each(function () {
+            $(this).addClass("hidden");
+            if (!$(this).parent().hasClass('noEdit')) {
+                $(this).parent().append("<label>" + $(this).val() + "</label>");
+                $(this).parent().addClass('noEdit');
+            }
+        });
+        $('form .portlet-body textArea').each(function () {
+            $(this).addClass("hidden");
+            if (!$(this).parent().hasClass('noEdit')) {
+                innerText = $(this).val();
+                if ($(this).val().length == 0) {
+                    innerText = "no tiene nada aun";
+                }
+                $(this).parent().append("<label>" + innerText + "</label>");
+                $(this).parent().addClass('noEdit');
+            }
+        });
+    } else {
+        $('.edit').hide();
+    }
+}
 
 var dateFormat = function () {
     var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
