@@ -334,7 +334,7 @@
                     }
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    alert('Event: ' + calEvent.title + calEvent._id);
+                    window.location.assign("ConsultDetail.aspx?consultId=" + calEvent._id);
                 }
             });
         });

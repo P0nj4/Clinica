@@ -161,6 +161,9 @@
             if (selectedOption == "Editar") {
                 window.location.assign("AddPatient.aspx?userId=" + $(".hidActionUserId").val());
             }
+            if (selectedOption == "Agendar consulta") {
+                window.location.assign("ConsultDetail.aspx?patientId=" + $(".hidActionUserId").val());
+            }
             
         }
 

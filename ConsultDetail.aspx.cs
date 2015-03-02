@@ -29,8 +29,8 @@ public partial class ConsultDetail : BasePage
                     this.txtPropusal.Text = (c.propousal != null ? c.propousal : "");
                     this.txtPrice.Text = c.price.ToString();
                     this.txtTreatment.Text = (c.treatment != null ? c.treatment : "");
-                    this.txtStartTime.Text = c.startDate.ToString("hh:mm");
-                    this.txtEndTime.Text = c.endDate.ToString("hh:mm");
+                    this.txtStartTime.Text = c.startDate.ToString("HH:mm");
+                    this.txtEndTime.Text = c.endDate.ToString("HH:mm");
                     Session["tempConsult"] = c;
                 }
             }

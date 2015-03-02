@@ -27,7 +27,7 @@ public partial class _Default : BasePage
             Literal litPhone = (Literal)e.Item.FindControl("litPhone");
             litPhone.Text = consult.patient.phone;
             Literal litAction = (Literal)e.Item.FindControl("litAction");
-            litAction.Text = "<a href='Consult.aspx?id=" + consult.patient.id.ToString() + "'>Ver más</a>";
+            litAction.Text = "<a href='ConsultDetail.aspx?consultId=" + consult.patient.id.ToString() + "'>Ver más</a>";
         }
     }
 }
