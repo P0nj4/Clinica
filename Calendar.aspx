@@ -43,6 +43,19 @@
             height: 34px;
             border: 1px solid #e5e5e5;
         }
+
+        textarea.error, input.error, a.select2-choice.error {
+            border: 1px solid red;
+        }
+        .lblHour {
+            line-height: 42px;
+        }
+        .lblPrice {
+            line-height: 38px;
+        }
+        .modal-body input {
+            padding-left:10px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
@@ -76,13 +89,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="control-label col-md-3">Fecha</label>
+                            <label class="control-label col-md-3 lblDate">Fecha</label>
                             <div class="col-md-9">
-                                <label id="lblSelectedDate">asdasd</label>
+                                <label id="lblSelectedDate">00/00/0000</label>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label class="control-label col-md-3">Hora</label>
+                            <label class="control-label col-md-3 lblHour">Hora</label>
                             <div class="col-md-9">
                                 Desde
                                 <input id="timepickerFrom" runat="server" type="text" class="timepickerFrom input-small">
@@ -92,21 +105,21 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label class="control-label col-md-3">Paciente</label>
+                            <label class="control-label col-md-3 lblPatient">Paciente</label>
                             <div class="col-md-9">
                                 <input type="hidden" id="select2_sample3" class="form-control select2">
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label class="control-label col-md-3">Precio</label>
+                            <label class="control-label col-md-3 lblPrice">Precio</label>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtPrice" runat="server" CssClass="input-small" />
+                                <asp:TextBox ID="txtPrice" runat="server" CssClass="input-small txtPrice"/>
                             </div>
                         </div>
                         <div class="col-md-12 last">
-                            <label class="control-label col-md-3">Diagnostico</label>
+                            <label class="control-label col-md-3 lblDiagnostic">Diagnostico</label>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtDiagnostic" runat="server" TextMode="MultiLine" />
+                                <asp:TextBox ID="txtDiagnostic" runat="server" TextMode="MultiLine" CssClass="txtDiagnostic" />
                             </div>
                         </div>
 
@@ -140,6 +153,8 @@
     <script type="text/javascript" src="./assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script type="text/javascript" src="./assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-validation/js/localization/messages_es.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         var addConsultAvailable = true; // (gup('addConsultAvailable') == '1');
@@ -172,23 +187,68 @@
                     userid = $('.hidSelectedUserId').val();
                     userName = $('.hidSelectedUserName').val();
                 }
-                if (userid && selectedDate) {
-                    $(".btnSubmitConsult").click();
+                valid = true;
+                txtPrice = $(".txtPrice");
+                if (txtPrice.val().length > 0 && /^\d*(?:\.\d{1,2})?$/.test(txtPrice.val())) {
+                    txtPrice.removeClass('error');
+                } else {
+                    valid = false;
+                    txtPrice.addClass('error');
+                }
+                txtDiagnostic = $(".txtDiagnostic");
+                if (txtDiagnostic.val().length > 1) {
+                    txtDiagnostic.removeClass('error');
+                } else {
+                    txtDiagnostic.addClass('error');
+                    valid = false;
+                }
+                if (!checkDateTimes()) {
+                    valid = false;
+                    alert('Los horarios para la consulta no son correctos');
+                    timePickerFrom.addClass('error');
+                    timePickerTo.addClass('error');
+                } else {
+                    timePickerFrom.removeClass('error');
+                    timePickerTo.removeClass('error');
                 }
 
-                //window.location = '/AddEditConsult.aspx?selectedDate=' + selectedDate + '&userId=' + userid + '&userName=' + userName;
+                if ($('#select2-chosen-1').text() == "Seleccionar...") {
+                    valid = false;
+                    $('#select2-chosen-1').parent().addClass('error');
+                } else {
+                    $('#select2-chosen-1').parent().removeClass('error');
+                }
+                
+                if (userid && selectedDate && valid) {
+                    $(".btnSubmitConsult").click();
+                    timePickerTo.addClass('error');
+                }
             }
         }
 
+        function checkDateTimes() {
+            var timeRegex = new RegExp('([0-9]{1,2}):([0-9]{2})');
+            var originalTime = timePickerFrom.val();
+
+            var time = $.trim(timePickerTo.val());
+            var isTime = timeRegex.test(time);
+            var integerTime = parseInt(time.replace(":", ""));
+            var integerOriginalTime = parseInt(originalTime.replace(":", ""));
+            var greater = integerTime > integerOriginalTime;
+            return isTime && greater;
+        }
+
+        var timePickerFrom;
+        var timePickerTo;
         jQuery(document).ready(function () {
-            var timePickerFrom = $('.timepickerFrom').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+            timePickerFrom = $('.timepickerFrom').timepicker({ 'showMeridian': false }).on('show.timepicker', function (e) {
                 console.log('The time is ' + e.time.value);
                 console.log('The hour is ' + e.time.hour);
                 console.log('The minute is ' + e.time.minute);
                 console.log('The meridian is ' + e.time.meridian);
             });
 
-            var timePickerTo = $('.timepickerTo').timepicker({ 'showMeridian': true }).on('show.timepicker', function (e) {
+            timePickerTo = $('.timepickerTo').timepicker({ 'showMeridian': false }).on('show.timepicker', function (e) {
                 console.log('The time is ' + e.time.value);
                 console.log('The hour is ' + e.time.hour);
                 console.log('The minute is ' + e.time.minute);
@@ -212,8 +272,6 @@
                 $('.hidSelectedUserName').val(e.added.text);
             });
 
-
-            // initiate layout and plugins
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -255,7 +313,7 @@
                         } else {
                             dateTimeAux = dateTimeAux + ' AM';
                         }
-                        d2.setHours(d2.getHours() + 3);
+                        d2.setHours(d2.getHours() + 4);
                         dateTimeToAux = d2.format('hh:MM');
                         if (d2.getHours() >= 12) {
                             dateTimeToAux = dateTimeToAux + ' PM';

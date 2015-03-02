@@ -121,5 +121,8 @@
         <!-- /.modal-dialog -->
     </div>
 </asp:Content>
+<asp:Content ID="scripts" runat="server" ContentPlaceHolderID="scripts">
+    
+</asp:Content>
 
 
