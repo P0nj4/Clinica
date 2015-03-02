@@ -22,36 +22,6 @@
 
             <!-- tabla de Pacientes -->
 
-            <div class="table-toolbar">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="btn-group">
-                            <button id="sample_editable_1_new" class="btn green">
-                                Agregar nuevo Paciente <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="btn-group pull-right">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                Tools <i class="fa fa-angle-down"></i>
-                            </button>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="#">Print </a>
-                                </li>
-                                <li>
-                                    <a href="#">Save as PDF </a>
-                                </li>
-                                <li>
-                                    <a href="#">Export to Excel </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="table-responsive">
                 <table class="table patientsTable turnDataTable">
                     <thead>
@@ -132,8 +102,6 @@
 <asp:Content ID="sss" ContentPlaceHolderID="scripts" runat="server">
     
  <script type="text/javascript">
-        
-
         function doOptionAction() {
             var selectedOption = $(".selectedOption option:selected").html();
             if (selectedOption == "Eliminar") {
@@ -164,7 +132,9 @@
             if (selectedOption == "Agendar consulta") {
                 window.location.assign("ConsultDetail.aspx?patientId=" + $(".hidActionUserId").val());
             }
-            
+            if (selectedOption == "Ver más información") {
+                window.location.assign("PatientDetail.aspx?patientId=" + $(".hidActionUserId").val());
+            }
         }
 
         $(document).ready(function () {

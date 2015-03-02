@@ -22,10 +22,10 @@ function makeNotEditable() {
         });
 
         $('form .portlet-body input[type=text]').each(function () {
-            $(this).addClass("hidden");
             if (!$(this).parent().hasClass('noEdit')) {
                 $(this).parent().append("<label>" + $(this).val() + "</label>");
                 $(this).parent().addClass('noEdit');
+                $(this).addClass("hidden");
             }
         });
         $('form .portlet-body textArea').each(function () {

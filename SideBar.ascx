@@ -56,19 +56,6 @@
                                             <i class="icon-calendar"></i>
                                             Calendario</a>
                                     </li>
-                                    <li>
-                                        <a href="javascript;">
-                                            <i class="icon-notebook"></i>
-                                            Agendar consulta
-                                        </a>
-                                    </li>
-                                    <li class="twoLines">
-                                        <a href="Calendar.aspx?addConsultAvailable=1">
-                                            <i class="icon-calendar"></i>
-                                            <p>Agendar consulta mediante calendario</p>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="last">

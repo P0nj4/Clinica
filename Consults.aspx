@@ -8,10 +8,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     
-    <div class="portlet box blue">
+    
+      <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-list"></i>Listado de consultas
+                <i class="fa fa-list"></i>Consultas del paciente
             </div>
             <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -25,64 +26,40 @@
                 <table class="table turnDataTable">
                     <thead>
                         <tr>
-                            <th>Paciente
+                            <th>ID
                             </th>
-                            <th>Fecha de la consulta
+                            <th>Hora de la consulta
                             </th>
-                            <th>Estado
+                            <th>Nombre
+                            </th>
+                            <th>Teléfono
                             </th>
                             <th>Acción
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>German Pereyra
-                            </td>
-                            <td>25/07/2014 12:00
-                            </td>
-                            <td>
-                                <span class="label label-danger tooltips" data-original-title="El cliente no concurrió">Cancelada</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maite Pereyra
-                            </td>
-                            <td>12/12/2012 13:00
-                            </td>
-                            <td><span class="label label-info">Pendiente</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Leandro Pereyra
-                            </td>
-                            <td>12/01/2015 13:05
-                            </td>
-                            <td>
-                                <span class="label label-success">Concurrió</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Natalia Costa
-                            </td>
-                            <td>12/01/2015 13:05
-                            </td>
-                            <td>
-                                <span class="label label-success">Concurrió</span>
-                            </td>
-                            <td>
-                                <a href="#change-status" data-toggle="modal" class="config" data-original-title="" title="">Cambiar estado</a>
-                            </td>
-                        </tr>
+                        <asp:Repeater ID="rptConsults" runat="server" OnItemDataBound="rptConsults_OnItemDataBound">
+                            <ItemTemplate>
+                                <tr>
+                                    <td>
+                                        <asp:Literal ID="litId" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litHour" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litName" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litPhone" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litAction" runat="server" />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </tbody>
                 </table>
             </div>

@@ -83,7 +83,7 @@
         </div>
         <div class="portlet-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table turnDataTable">
                     <thead>
                         <tr>
                             <th>ID

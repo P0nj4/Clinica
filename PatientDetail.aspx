@@ -87,10 +87,10 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
-                            <asp:Button CssClass="btn green" ID="btnSubmit" runat="server" Text="Guardar" OnClick="btnSubmit_Click" >
+                            <asp:Button CssClass="btn green btnSubmit" ID="btnSubmit" runat="server" Text="Guardar" OnClick="btnSubmit_Click" >
                               
                             </asp:Button>
-                            <button type="button" class="btn default">Cancel</button>
+                            <button type="button" class="btn default edit">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
         </div>
         <div class="portlet-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table turnDataTable">
                     <thead>
                         <tr>
                             <th>ID

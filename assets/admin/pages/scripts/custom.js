@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    if ($('.turnDataTable')) {
     oTable = $('.turnDataTable').DataTable({
         "oLanguage": {
             "oPaginate": {
@@ -14,7 +15,10 @@ $(document).ready(function () {
             "sLengthMenu": "Mostrar de a _MENU_ entradas"
         }
     });
-    $('#txtSearchField').keyup(function () {
-        oTable.search($(this).val()).draw();
-    })
+        $('#txtSearchField').keyup(function () {
+            oTable.search($(this).val()).draw();
+        });
+    } else {
+        $('#txtSearchField').hide();
+    }
 });

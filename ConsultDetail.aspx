@@ -87,7 +87,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Rating de estado del paciente</label>
-                        <div class="col-md-4">
+                        <div class="col-md-4 noEdit">
                             <asp:TextBox ID="txtRating" CssClass="form-control rating" runat="server" />
                         </div>
                     </div>
