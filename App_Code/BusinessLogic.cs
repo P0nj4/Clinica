@@ -194,6 +194,37 @@ public class BusinessLogic
         return consults;
     }
 
+    public static List<Consult> getConsultsOfPatient(int patientid)
+    {
+        List<Consult> consults = new List<Consult>();
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.patientId = c.patientId) inner join Users u on (u.userId = c.assignedTo) where c.patientId = @id", myConnection);
+
+            SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.Int);
+            pid.Value = patientid;
+            myCommand.Parameters.Add(pid);
+            
+            r = myCommand.ExecuteReader();
+            while (r.Read())
+            {
+                Consult c = new Consult(r);
+                consults.Add(c);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return consults;
+    }
+
     public static Consult getConsult(int id)
     {
         Consult response = null;

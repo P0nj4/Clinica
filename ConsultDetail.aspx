@@ -15,7 +15,7 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-user-plus"></i>Nuevo paciente
+                <i class="fa fa-user-plus"></i>Datos de consulta
             </div>
             <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -31,6 +31,7 @@
                         <label class="control-label col-md-3">Paciente</label>
                         <div class="col-md-4">
                             <asp:Label ID="lblPatientName" runat="server" CssClass="control-label lblPatientName" />
+                            <a href="#" id="btnSeeMore" runat="server">Ver mas</a>
                         </div>
                     </div>
                     <div class="form-group">

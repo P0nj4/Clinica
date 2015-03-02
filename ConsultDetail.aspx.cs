@@ -31,6 +31,7 @@ public partial class ConsultDetail : BasePage
                     this.txtTreatment.Text = (c.treatment != null ? c.treatment : "");
                     this.txtStartTime.Text = c.startDate.ToString("HH:mm");
                     this.txtEndTime.Text = c.endDate.ToString("HH:mm");
+                    btnSeeMore.Attributes["href"] = "PatientDetail.aspx?patientId=" + c.patient.id;
                     Session["tempConsult"] = c;
                 }
             }
@@ -38,6 +39,7 @@ public partial class ConsultDetail : BasePage
             {
                 int id = int.Parse(Request.Params["patientId"]);
                 p = BusinessLogic.getPatient(id);
+                btnSeeMore.Attributes["href"] = "PatientDetail.aspx?patientId=" + id;
                 if (p != null)
                 {
                     lblPatientName.Text = p.fullName;
