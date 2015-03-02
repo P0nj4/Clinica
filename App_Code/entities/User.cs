@@ -24,17 +24,13 @@ public class User
 	
     public User(SqlDataReader r)
 	{
-        if (Utilities.HasColumn(r, "patientId"))
+        if (Utilities.HasColumn(r, "userId"))
         {
-            this.id = (int)r["patientId"];
-        }
-        else {
-            this.id = (int)r["id"];
-        }
-        this.name = (string)r["name"];
-        this.lastName = (string)r["lastName"];
-        this.email = (string)r["email"];
-        this.clinicId = (int)r["clinicId"];
-	    
+            this.id = (int)r["userId"];
+            this.name = (string)r["name"];
+            this.lastName = (string)r["lastName"];
+            this.email = (string)r["email"];
+            this.clinicId = (int)r["clinicId"];
+        }   
     }
 }

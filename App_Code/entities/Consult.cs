@@ -31,29 +31,25 @@ public class Consult
 
     public Consult(SqlDataReader r)
     {
-        if (Utilities.HasColumn(r,"consultId"))
+        if (Utilities.HasColumn(r, "consultId"))
         {
             this.id = (int)r["consultId"];
+            this.startDate = (DateTime)r["startDate"];
+            this.endDate = (DateTime)r["endDate"];
+            this.price = (double)r["price"];
+            this.patient = new Patient(r);
+            if (r["treatment"] != DBNull.Value)
+                this.treatment = (string)r["treatment"];
+            if (r["diagnostic"] != DBNull.Value)
+                this.diagnostic = (string)r["diagnostic"];
+            if (r["propousal"] != DBNull.Value)
+                this.propousal = (string)r["propousal"];
+            if (r["clinicalAnalysis"] != DBNull.Value)
+                this.clinicalAnalysis = (string)r["clinicalAnalysis"];
+            if (r["rating"] != DBNull.Value)
+                this.rating = (int)r["rating"];
+            this.assignedTo = new User(r);
         }
-        else {
-            this.id = (int)r["id"];
-        }
-
-        this.startDate = (DateTime)r["startDate"];
-        this.endDate = (DateTime)r["endDate"];
-        this.price = (double)r["price"];
-        this.patient = new Patient(r);
-        if (r["treatment"] != DBNull.Value) 
-            this.treatment = (string)r["treatment"];
-        if (r["diagnostic"] != DBNull.Value) 
-            this.diagnostic = (string)r["diagnostic"];
-        if (r["propousal"] != DBNull.Value) 
-            this.propousal = (string)r["propousal"];
-        if (r["clinicalAnalysis"] != DBNull.Value) 
-            this.clinicalAnalysis = (string)r["clinicalAnalysis"];
-        if (r["rating"] != DBNull.Value) 
-            this.rating = (int)r["rating"];
-        this.assignedTo = new User(r);
     }
 
     public string convertToJson () {

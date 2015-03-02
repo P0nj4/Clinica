@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,7 @@ public class Utilities
 		//
 	}
 
-    public static bool HasColumn(SqlDataReader Reader, string ColumnName)
+    public static bool HasColumn2(SqlDataReader Reader, string ColumnName)
     {
         foreach (System.Data.DataColumn row in Reader.GetSchemaTable().Columns)
         {
@@ -24,5 +25,17 @@ public class Utilities
                 return true;
         } //Still here? Column not found. 
         return false;
+    }
+
+    public static bool HasColumn(IDataReader dataReader, string columnName)
+    {
+        try
+        {
+            return dataReader.GetOrdinal(columnName) >= 0;
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return false;
+        }
     }
 }

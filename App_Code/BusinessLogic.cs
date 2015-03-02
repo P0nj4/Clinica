@@ -67,7 +67,7 @@ public class BusinessLogic
         {
             myConnection.Open();
             SqlDataReader myReader = null;
-            SqlCommand myCommand = new SqlCommand("select * from Patients where id = @id", myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Patients where patientId = @id", myConnection);
             SqlParameter param = new SqlParameter("@id", System.Data.SqlDbType.Int);
             param.Value = id;
             myCommand.Parameters.Add(param);
@@ -149,7 +149,7 @@ public class BusinessLogic
         {
             myConnection.Open();
             SqlDataReader r = null;
-            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.id = c.patientId) inner join Users u on (u.id = c.assignedTo) where c.startDate >= '" + DateTime.Now.ToString("yyyy-MM-dd") + "' and c.startDate <= '" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") +"'" , myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.patientId = c.patientId) inner join Users u on (u.userId = c.assignedTo) where c.startDate >= '" + DateTime.Now.ToString("yyyy-MM-dd") + "' and c.startDate <= '" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") +"'" , myConnection);
             r = myCommand.ExecuteReader();
             while (r.Read())
             {
@@ -175,7 +175,7 @@ public class BusinessLogic
         {
             myConnection.Open();
             SqlDataReader r = null;
-            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.id = c.patientId) where id = @id", myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.patientId = c.patientId) where c.consultId = @id", myConnection);
 
             SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.Int);
             pid.Value = id;
@@ -246,7 +246,7 @@ public class BusinessLogic
             if (r.Read())
             {
                 response = new User();
-                response.id = (int)r["id"];
+                response.id = (int)r["userId"];
                 response.lastName = r["lastName"].ToString();
                 response.name = r["name"].ToString();
                 response.clinicId = (int)r["clinicId"];

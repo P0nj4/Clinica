@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Paciente</label>
                         <div class="col-md-4">
-                            <asp:Label ID="lblPatientName" runat="server" CssClass="control-label col-md-3" />
+                            <asp:Label ID="lblPatientName" runat="server" CssClass="control-label lblPatientName" />
                         </div>
                     </div>
                     <div class="form-group">
