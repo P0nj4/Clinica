@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Rating de estado del paciente</label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="txtRating" TextMode="MultiLine" CssClass="form-control rating" runat="server" />
+                            <asp:TextBox ID="txtRating" CssClass="form-control rating" runat="server" />
                         </div>
                     </div>
                     <div class="form-group last">
@@ -157,7 +157,7 @@
             $(".rating").TouchSpin({
                 initval: 1,
                 max: 10,
-                min: 0
+                min: 1
             });
         });
 

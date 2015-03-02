@@ -220,6 +220,31 @@ public class BusinessLogic
             myConnection.Close();
         }
     }
+
+    public static void updateConsult(Consult c)
+    {
+        SqlCommand myCommand = new SqlCommand("Update Consults set startDate = @startDate , endDate = @endDate, price = @price, diagnostic = @diagnostic, scheduler = @scheduler, patientId = @patientId, assignedTo = @assignedTo, " +
+                                     " treatment = @treatment, propousal = @propousal, rating = @rating, clinicalAnalysis = @clinicalAnalysis where consultId = @id", myConnection);
+
+        Consult.addDBParametersFromConsult(c, myCommand);
+
+        SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.Int);
+        pid.Value = c.id;
+        myCommand.Parameters.Add(pid);
+        try
+        {
+            myConnection.Open();
+            myCommand.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+    }
     
     #endregion
 
