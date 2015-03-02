@@ -1,10 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ConsultDetail.aspx.cs" Inherits="ConsultDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" />
+    <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.min.css" />
+
+   <link rel="stylesheet" type="text/css" href="assets/mine.css" />
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Balloons" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Literal ID="litError" runat="server" />
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
@@ -67,19 +74,19 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Tratamiento</label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="txtTreatment" CssClass="form-control" runat="server" />
+                            <asp:TextBox ID="txtTreatment" CssClass="form-control" TextMode="MultiLine" runat="server" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Rating de estado del paciente</label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="txtRating" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                            <asp:TextBox ID="txtRating" TextMode="MultiLine" CssClass="form-control rating" runat="server" />
                         </div>
                     </div>
                     <div class="form-group last">
                         <label class="control-label col-md-3">Propuesta para la pr&oacute;xima consulta</label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="txtPropusal" CssClass="form-control" runat="server" />
+                            <asp:TextBox ID="txtPropusal" CssClass="form-control" TextMode="MultiLine" runat="server" />
                         </div>
                     </div>
                    
@@ -101,6 +108,12 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="scripts" Runat="Server">
     <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
     <script src="assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-validation/js/localization/messages_es.min.js" type="text/javascript"></script>
+
+    <script src="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -138,7 +151,13 @@
             });
 
             $(".txtPrice").rules("add", {
-                time: true
+                number: true
+            });
+
+            $(".rating").TouchSpin({
+                initval: 1,
+                max: 10,
+                min: 0
             });
         });
 

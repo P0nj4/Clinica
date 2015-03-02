@@ -168,6 +168,37 @@ public class BusinessLogic
         return consults;
     }
 
+    public static Consult getConsult(int id)
+    {
+        Consult response = null;
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select * from Consults c inner join Patients p on (p.id = c.patientId) where id = @id", myConnection);
+
+            SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.Int);
+            pid.Value = id;
+            myCommand.Parameters.Add(pid);
+
+            r = myCommand.ExecuteReader();
+
+            if (r.Read())
+            {
+                response = new Consult(r);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return response;
+    }
+
     public static void insertConsult(Consult c)
     {
         SqlCommand myCommand = new SqlCommand("INSERT INTO Consults (startDate, endDate, price, diagnostic, scheduler, patientId, assignedTo) " +
