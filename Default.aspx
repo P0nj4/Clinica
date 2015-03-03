@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
+<%@ Register src="ConsultModalOptions.ascx" tagname="ConsultModalOptions" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Balloons" ContentPlaceHolderID="Balloons" runat="server">
@@ -134,36 +136,7 @@
     <!-- fin Proximas consultas -->
 
 
+    <uc1:ConsultModalOptions ID="ConsultModalOptions1" runat="server" />
 
-    <div class="modal fade bs-modal-sm" id="change-status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="" class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Cambiar estado de la consulta a:</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default">
-                                <input type="radio" class="toggle">
-                                Consulta confirmada
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="radio" class="toggle">
-                                Conculta cancelada
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn blue">Save changes</button>
-                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
 </asp:Content>
 

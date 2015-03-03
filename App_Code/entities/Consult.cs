@@ -111,6 +111,10 @@ public class Consult
     {
         return "{\"startDate\":  \"" + startDate.ToString("dd/MM/yyyy HH:mm") + "\", \"endDate\":  \"" + this.endDate.ToString("dd/MM/yyyy HH:mm") + "\", \"id\":\"" + this.id + "\", \"price\":\""+ this.price +"\", \"state\":\"" + this.state.ToString() + "\"}";
     }
+    public string convertToObjectDetailsJson()
+    {
+        return "{\"state\":\"" + this.state.ToString() + "\", \"diagnostic\":\""+diagnostic+"\", \"clinicalAnalysis\":\""+clinicalAnalysis+"\", \"treatment\":\""+treatment+"\", \"propousal\":\""+propousal+"\", \"rating\":\""+rating+"\"}";
+    }
 
     private string getColorNameByState() {
         switch (this.state)

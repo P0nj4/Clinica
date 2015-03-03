@@ -67,6 +67,14 @@ public class UserHandler : IHttpHandler
                     }
                 }
                 break;
+            case "getconsult":
+                string Id = context.Request.Params["consultId"].ToLower();
+                if (Id.Length > 0)
+                {
+                    Consult c = BusinessLogic.getConsult(int.Parse(Id));
+                    result = c.convertToObjectDetailsJson();
+                }
+                break;
         }
         if (result.Length == 0) {
             result = "{\"error\":false, \"errorMessage\":\"Oups! Ocurrió un error. vuelva a intentarlo en unos minutos o llame al administrador del sistema\"}";
