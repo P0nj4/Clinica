@@ -377,7 +377,7 @@ public class BusinessLogic
         {
             myConnection.Open();
             SqlDataReader r = null;
-            SqlCommand myCommand = new SqlCommand("select * from Users", myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Users where email like @email and password like @password", myConnection);
 
             SqlParameter pEmail = new SqlParameter("@email", System.Data.SqlDbType.NVarChar);
             pEmail.Value = email;
