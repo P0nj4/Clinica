@@ -29,7 +29,7 @@ public class CalendarEvents : IHttpHandler {
             else {
                 result += ",";
             }
-            result += aux.convertToJson();
+            result += aux.convertToCalendarJson();
         }
         context.Response.Write("["+ result +"]");
         

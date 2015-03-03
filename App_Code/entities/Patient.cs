@@ -17,9 +17,7 @@ public class Patient
     public string description { get; set; }
     public DateTime birthday { get; set; }
     public string birthPlace { get; set; }
-    public double lastPrice { get; set; }
     public string referred { get; set; }
-    public DateTime lastConsult { get; set; }
     public string fullName
     {
         get
@@ -45,17 +43,13 @@ public class Patient
         {
             this.name = myReader["name"].ToString();
             this.lastName = myReader["lastName"].ToString();
-            this.email = myReader["email"].ToString(); this.phone = myReader["phone"].ToString();
+            this.email = myReader["email"].ToString(); 
+            this.phone = myReader["phone"].ToString();
             this.description = myReader["description"].ToString();
             this.birthday = (DateTime)myReader["birthDate"];
             this.birthPlace = myReader["birthPlace"].ToString();
             this.referred = myReader["referred"].ToString();
-
             this.id = (int)myReader["patientId"];
-            if (myReader["lastConsultDate"] != DBNull.Value)
-            {
-                this.lastConsult = (DateTime)myReader["lastConsultDate"];
-            }
         }
     }
     public Patient() { 

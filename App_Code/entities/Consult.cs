@@ -10,7 +10,7 @@ using System.Web;
 /// </summary>
 public class Consult
 {
-    enum ConsultState { Pending, Confirmed, Canceled, AutoCanceled };
+    public enum ConsultState { Pending = 1, Confirmed = 2, Canceled = 3, AutoCanceled = 4 };
 
     public DateTime startDate { get; set; }
     public DateTime endDate { get; set; }
@@ -24,10 +24,18 @@ public class Consult
     public User scheduler { get; set; }
     public string clinicalAnalysis { get; set; }
     public int rating { get; set; }
+    public ConsultState state { get; set; }
 
 	public Consult()
 	{
 	}
+
+    private enum DateComparisonResult
+    {
+        Earlier = -1,
+        Later = 1,
+        TheSame = 0
+    };
 
     public Consult(SqlDataReader r)
     {
@@ -49,11 +57,43 @@ public class Consult
             if (r["rating"] != DBNull.Value)
                 this.rating = (int)r["rating"];
             this.assignedTo = new User(r);
+
+            int state = (int)r["rating"];
+            this.loadStateFromInt(state);
         }
     }
 
-    public string convertToJson () {
+    public void loadStateFromInt(int state) {
+        switch (state) {
+                case 1:
+                    DateComparisonResult compare = (DateComparisonResult)this.endDate.CompareTo(DateTime.Now.AddDays(1));
+                    if (compare == DateComparisonResult.Earlier)
+                    {
+                        this.state = ConsultState.AutoCanceled;
+                    }
+                    else {
+                        this.state = ConsultState.Pending;
+                    }
+                    break;
+                case 2:
+                    this.state = ConsultState.Confirmed;
+                    break;
+                case 3:
+                    this.state = ConsultState.Canceled;
+                    break;
+                default:
+                    this.state = ConsultState.Pending;
+                    break;
+            }
+    }
+
+    public string convertToCalendarJson () {
         return "{\"start\":  \"" + startDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"end\":  \"" + this.endDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"title\":\"" + this.patient.name + "\", \"id\":\"" + this.id + "\"}";
+    }
+
+    public string convertToObjectJson()
+    {
+        return "{\"startDate\":  \"" + startDate.ToString("dd/MM/yyyy HH:mm") + "\", \"endDate\":  \"" + this.endDate.ToString("dd/MM/yyyy HH:mm") + "\", \"id\":\"" + this.id + "\", \"price\":\""+ this.price +"\", \"state\":\"" + this.state.ToString() + "\"}";
     }
 
     public static void addDBParametersFromConsult(Consult c, SqlCommand comm)

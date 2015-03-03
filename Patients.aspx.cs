@@ -31,7 +31,7 @@ public partial class Patients : BasePage
             Literal litPhone = (Literal)e.Item.FindControl("litPhone");
             litPhone.Text = patient.phone;
             Literal litLastConsult = (Literal)e.Item.FindControl("litLastConsult");
-            litLastConsult.Text = (patient.lastConsult != null ? patient.lastConsult.ToString("dd/MM/yyyy") : "Nunca");
+            litLastConsult.Text = ("Temporalmente deshabilitado");
             Literal litButtonOptions = (Literal)e.Item.FindControl("litButtonOptions");
             litButtonOptions.Text = "<a class=\"btn btn-sm blue options\" data-toggle=\"modal\" href=\"#opciones\" userId=" + patient.id + " >Opciones</a>";
 

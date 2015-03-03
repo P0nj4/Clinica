@@ -329,6 +329,44 @@ public class BusinessLogic
             myConnection.Close();
         }
     }
+
+    public static Consult getConsultByPatientId(int id)
+    {
+        Consult response = null;
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select top(1) consultId, startDate, endDate, price, rating, state from Consults c where c.patientId = @id order by 2 desc", myConnection);
+
+            SqlParameter pid = new SqlParameter("@id", System.Data.SqlDbType.Int);
+            pid.Value = id;
+            myCommand.Parameters.Add(pid);
+
+            r = myCommand.ExecuteReader();
+
+            if (r.Read())
+            {
+                response = new Consult();
+                response.id = (int)r["consultId"];
+                response.startDate = (DateTime)r["startDate"];
+                response.endDate = (DateTime)r["endDate"];
+                response.price = double.Parse(r["price"].ToString());
+                response.rating = (int)r["rating"];
+                response.loadStateFromInt((int)r["state"]);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return response;
+    }
+
     
     #endregion
 

@@ -54,6 +54,22 @@ public class UserHandler : IHttpHandler
                 }
                 result += "]}";
                 break;
+            case "getlastconsult":
+                string strId = context.Request.Params["userId"].ToLower();
+                if (strId.Length > 0) {
+                    Consult c = BusinessLogic.getConsultByPatientId(int.Parse(strId));
+                    if (c != null)
+                    {
+                        result = c.convertToObjectJson();
+                    }
+                    else {
+                        result = "{\"firstConsult\":true}";
+                    }
+                }
+                break;
+        }
+        if (result.Length == 0) {
+            result = "{\"error\":false, \"errorMessage\":\"Oups! Ocurrió un error. vuelva a intentarlo en unos minutos o llame al administrador del sistema\"}";
         }
         context.Response.Write(result);
     }

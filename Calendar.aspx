@@ -56,6 +56,10 @@
         .modal-body input {
             padding-left:10px;
         }
+        .patientDidntCame {
+            color: red;
+font-size: 12px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
@@ -114,6 +118,8 @@
                             <label class="control-label col-md-3 lblPrice">Precio</label>
                             <div class="col-md-9">
                                 <asp:TextBox ID="txtPrice" runat="server" CssClass="input-small txtPrice"/>
+                                <label class="lastPrice"></label>
+                                <label class="patientDidntCame" style="display:none;"></label>
                             </div>
                         </div>
                         <div class="col-md-12 last">
@@ -270,6 +276,7 @@
             $('#select2_sample3').on("change", function (e) {
                 $('.hidSelectedUserId').val(e.val);
                 $('.hidSelectedUserName').val(e.added.text);
+                getPatientExtraInfo(e.val);
             });
 
             $('#calendar').fullCalendar({
@@ -339,6 +346,32 @@
             });
         });
 
+
+        function getPatientExtraInfo(puserId) {
+            $.ajax({
+                type: "POST",
+                url: "handlers/UserHandler.ashx",
+                data: { method: "getlastconsult", userId: puserId }
+            })
+            .done(function (obj) {
+                if (!obj.firstConsult) {
+                    lastPrice = $(".lastPrice");
+                    lastPrice.text("(Costo de la última consulta: " + obj.price + ")");
+                    lastPrice.show();
+                    if (obj.state == "AutoCanceled") {
+                        patientDidntCame = $(".patientDidntCame");
+                        patientDidntCame.text("El paciente no concurrió a su última consulta del " + obj.startDate);
+                        patientDidntCame.show();
+                    } else {
+                        $(".patientDidntCame").hide();
+                    }
+                } else {
+                    lastPrice = $(".lastPrice");
+                    lastPrice.text("Primer consulta del paciente");
+                    lastPrice.show();
+                }
+            });
+        }
     </script>
 
 </asp:Content>
