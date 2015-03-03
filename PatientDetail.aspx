@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="PatientDetail.aspx.cs" Inherits="PatientDetail" %>
 
+<%@ Register src="PatientProgress.ascx" tagname="PatientProgress" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" />
     <link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
@@ -9,6 +11,8 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:literal ID="litError" runat="server" />
+
+    
      <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
@@ -154,6 +158,24 @@
             </div>
         </div>
     </div>
+
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i>Progreso del paciente
+            </div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""></a>
+                <a href="javascript:;" class="reload" data-original-title="" title=""></a>
+                <a href="javascript:;" class="remove" data-original-title="" title=""></a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <uc1:PatientProgress ID="PatientProgress1" runat="server" />
+
+            </div>
+        </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="scripts" Runat="Server">
     <script src="./assets/admin/pages/scripts/components-form-tools.js"></script>

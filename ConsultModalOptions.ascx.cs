@@ -17,4 +17,24 @@ public partial class ConsultModalOptions : System.Web.UI.UserControl
             ddlState.Items.Add(new ListItem("No asistió", Consult.ConsultState.AutoCanceled.ToString()));
         }
     }
+
+    protected void SaveChanges(object sender, EventArgs e) {
+        Consult c = BusinessLogic.getConsult(int.Parse(this.selectedConsultId.Value));
+        if (c != null) {
+            c.propousal = txtPropusal.Text;
+            c.treatment = txtTreatment.Text;
+            c.state = (Consult.ConsultState)Enum.Parse(typeof(Consult.ConsultState), ddlState.SelectedValue);
+            if (c.state == Consult.ConsultState.Confirmed)
+            {
+                c.rating = int.Parse(txtRating.Text);
+            }
+            else {
+                c.rating = 1;
+            }
+            c.clinicalAnalysis = txtClinicAnalysis.Text;
+            BusinessLogic.updateConsult(c);
+            Response.Redirect(Request.RawUrl);
+        }
+    }
+     
 }

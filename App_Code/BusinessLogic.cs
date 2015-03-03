@@ -307,7 +307,7 @@ public class BusinessLogic
 
     public static void updateConsult(Consult c)
     {
-        SqlCommand myCommand = new SqlCommand("Update Consults set state = @state, startDate = @startDate , endDate = @endDate, price = @price, diagnostic = @diagnostic, scheduler = @scheduler, patientId = @patientId, assignedTo = @assignedTo, " +
+        SqlCommand myCommand = new SqlCommand("Update Consults set state = @state, startDate = @startDate , endDate = @endDate, price = @price, diagnostic = @diagnostic, " + (c.scheduler != null ? "scheduler = @scheduler," : "") + " patientId = @patientId, " + (c.scheduler != null ? "assignedTo = @assignedTo," : "") + 
                                      " treatment = @treatment, propousal = @propousal, rating = @rating, clinicalAnalysis = @clinicalAnalysis where consultId = @id", myConnection);
 
         Consult.addDBParametersFromConsult(c, myCommand);

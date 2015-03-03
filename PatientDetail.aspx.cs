@@ -18,7 +18,9 @@ public partial class PatientDetail : System.Web.UI.Page
             }
             else {
                 int id = int.Parse(Request.Params["patientId"]);
-                this.rptConsults.DataSource = BusinessLogic.getConsultsOfPatient(id);
+                List<Consult> list = BusinessLogic.getConsultsOfPatient(id);
+                this.PatientProgress1.allConsults = list;
+                this.rptConsults.DataSource = list;
                 this.rptConsults.DataBind();
 
                 Patient p = BusinessLogic.getPatient(id);

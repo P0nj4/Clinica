@@ -113,7 +113,7 @@ public class Consult
     }
     public string convertToObjectDetailsJson()
     {
-        return "{\"state\":\"" + this.state.ToString() + "\", \"diagnostic\":\""+diagnostic+"\", \"clinicalAnalysis\":\""+clinicalAnalysis+"\", \"treatment\":\""+treatment+"\", \"propousal\":\""+propousal+"\", \"rating\":\""+rating+"\"}";
+        return "{\"state\":\"" + this.state.ToString() + "\", \"diagnostic\":\"" + diagnostic + "\", \"clinicalAnalysis\":\"" + clinicalAnalysis + "\", \"treatment\":\"" + treatment + "\", \"propousal\":\"" + propousal + "\", \"rating\":\"" + rating + "\", \"editable\":" + (endDate.CompareTo(DateTime.Now) < 1).ToString().ToLower() + "}";
     }
 
     private string getColorNameByState() {

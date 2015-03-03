@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Calendar.aspx.cs" Inherits="Calendar" %>
 
+<%@ Register src="ConsultModalOptions.ascx" tagname="ConsultModalOptions" tagprefix="uc1" %>
+
 <asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
     <link href="assets/global/plugins/fullcalendar/fullcalendar.min.css" rel='stylesheet' />
     <link href="assets/global/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print' />
@@ -58,13 +60,15 @@
         }
         .patientDidntCame {
             color: red;
-font-size: 12px;
+            font-size: 12px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="breadcram" runat="server" ContentPlaceHolderID="Balloons">
 </asp:Content>
 <asp:Content ID="bodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <uc1:ConsultModalOptions ID="ConsultModalOptions1" runat="server" />
+
     <asp:Button ID="btnSubmitConsult" CssClass="btnSubmitConsult" runat="server" Text="submit" style="display:none;" OnClick="btnSubmitConsult_Click" />
     <div class="portlet box green-meadow calendar">
         <div class="portlet-title">
@@ -145,6 +149,8 @@ font-size: 12px;
     <input type="hidden" id="hidSelectedDate" runat="server" class="hidSelectedDate" />
     <input type="hidden" id="hidSelectedUserId" runat="server" class="hidSelectedUserId" />
     <input type="hidden" id="hidSelectedUserName" runat="server" class="hidSelectedUserName" />
+    
+    
 </asp:Content>
 
 <asp:Content ID="scriptsContent" ContentPlaceHolderID="scripts" runat="server">
@@ -341,10 +347,18 @@ font-size: 12px;
                     }
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    window.location.assign("ConsultDetail.aspx?consultId=" + calEvent._id);
+                    //$('#opciones').modal('show');
+                    //$('#Estados').modal('show');
+                    setTimeout(function () { $('#opciones').modal('show'); }, 500);
+                    $(".selectedConsultId").val(calEvent._id);
+                    //window.location.assign("ConsultDetail.aspx?consultId=" + );
                 }
             });
         });
+
+        function showModalConsult() {
+            $('#opciones').modal('show');
+        }
 
 
         function getPatientExtraInfo(puserId) {

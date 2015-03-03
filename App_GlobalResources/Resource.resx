@@ -120,11 +120,23 @@
   <data name="page_addpatient" xml:space="preserve">
     <value>Agregar paciente</value>
   </data>
+  <data name="page_calendar" xml:space="preserve">
+    <value>Calendario de consultas</value>
+  </data>
+  <data name="page_consultdetail" xml:space="preserve">
+    <value>Detalles de la consulta</value>
+  </data>
+  <data name="page_consults" xml:space="preserve">
+    <value />
+  </data>
   <data name="page_dashboard" xml:space="preserve">
     <value>Inicio</value>
   </data>
   <data name="page_default" xml:space="preserve">
     <value>Inicio</value>
+  </data>
+  <data name="page_patientdetail" xml:space="preserve">
+    <value>Detalles del paciente</value>
   </data>
   <data name="page_patients" xml:space="preserve">
     <value>Pacientes</value>
