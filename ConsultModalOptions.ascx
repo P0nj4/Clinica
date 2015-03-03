@@ -49,19 +49,19 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">An&aacute;lisis cl&iacute;nico</label>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtClinicAnalysis" CssClass="form-control" TextMode="MultiLine" runat="server" />
+                                <asp:TextBox ID="txtClinicAnalysis" CssClass="form-control clinicalAnalysis" TextMode="MultiLine" runat="server" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Tratamiento</label>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtTreatment" CssClass="form-control" TextMode="MultiLine" runat="server" />
+                                <asp:TextBox ID="txtTreatment" CssClass="form-control treatment" TextMode="MultiLine" runat="server" />
                             </div>
                         </div>
                         <div class="form-group last">
                             <label class="control-label col-md-3">Propuesta para la pr&oacute;xima consulta</label>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtPropusal" CssClass="form-control" TextMode="MultiLine" runat="server" />
+                                <asp:TextBox ID="txtPropusal" CssClass="form-control propusal" TextMode="MultiLine" runat="server" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,6 +76,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn blue" onclick="doOptionAction()">Aceptar</button>
+                
             </div>
         </div>
         <!-- /.modal-content -->
@@ -123,10 +124,7 @@ opacity: 0.5;
         if (selectedOption == "Cambiar estado") {
             // window.location.href = "ConsultDetail.aspx?consultId=" + $("#selectedConsultId").val() + "&edit=1";
             modal = $('#Estados').modal('show');
-            modal.on('show.bs.modal', function (e) {
-                //if (!data) return e.preventDefault() // stops modal from being shown
-                getConsultDetails();
-            });
+            getConsultDetails();
         }
     }
 
@@ -136,9 +134,15 @@ opacity: 0.5;
         type: "POST",
         url: "handlers/UserHandler.ashx",
         data: { method: "getconsult", consultId: $("#selectedConsultId").val() }
-        }).done(function (msg) {
+        }).done(function (obj) {
             $(".loadingConsultData").hide();
-            alert( "Data Saved: " + msg );
+            $(".clinicalAnalysis").val(obj.clinicalAnalysis);
+            $(".propousal").val(obj.propousal);
+            $(".rating").val(obj.rating);
+            $(".treatment").val(obj.treatment);
+            $(".ddlState").val(obj.state);
+            
+
         }).fail(function( jqXHR, textStatus ) {
             $(".loadingConsultData").hide();
             alert( "Request failed: " + textStatus );

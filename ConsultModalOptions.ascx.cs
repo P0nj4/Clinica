@@ -11,10 +11,10 @@ public partial class ConsultModalOptions : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            ddlState.Items.Add("Pendiente");
-            ddlState.Items.Add("Concurrida");
-            ddlState.Items.Add("Cancelada");
-            ddlState.Items.Add("No asistió");
+            ddlState.Items.Add(new ListItem("Pendiente", Consult.ConsultState.Pending.ToString()));
+            ddlState.Items.Add(new ListItem("Concurrida", Consult.ConsultState.Confirmed.ToString()));
+            ddlState.Items.Add(new ListItem("Cancelada", Consult.ConsultState.Canceled.ToString()));
+            ddlState.Items.Add(new ListItem("No asistió", Consult.ConsultState.AutoCanceled.ToString()));
         }
     }
 }
