@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,6 +28,8 @@ public partial class Consults : BasePage
             litPhone.Text = consult.patient.phone;
             Literal litAction = (Literal)e.Item.FindControl("litAction");
             litAction.Text = "<a href='ConsultDetail.aspx?consultId=" + consult.patient.id.ToString() + "'>Ver más</a>";
+            Literal litEstado = (Literal)e.Item.FindControl("litEstado");
+            litEstado.Text = consult.getStateString();
         }
     }
 }

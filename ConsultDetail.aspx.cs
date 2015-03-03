@@ -9,6 +9,7 @@ public partial class ConsultDetail : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        litError.Text = "";
         if (!IsPostBack)
         {
             Session["tempPatient"] = null;
@@ -16,6 +17,10 @@ public partial class ConsultDetail : BasePage
 
             Consult c = null;
             Patient p = null;
+            ddlState.Items.Add("Pendiente");
+            ddlState.Items.Add("Concurrida");
+            ddlState.Items.Add("Cancelada");
+            ddlState.Items.Add("No asistió");
             if (Request.Params["consultId"] != null)
             {
                 int id = int.Parse(Request.Params["consultId"]);
@@ -32,6 +37,26 @@ public partial class ConsultDetail : BasePage
                     this.txtStartTime.Text = c.startDate.ToString("HH:mm");
                     this.txtEndTime.Text = c.endDate.ToString("HH:mm");
                     btnSeeMore.Attributes["href"] = "PatientDetail.aspx?patientId=" + c.patient.id;
+                    switch (c.state) { 
+                        case Consult.ConsultState.Pending:
+                            ddlState.SelectedIndex = 0;
+                            break;
+                        case Consult.ConsultState.Canceled:
+                            ddlState.SelectedIndex = 2;
+                            if (c.endDate.CompareTo(DateTime.Now) < 1) {
+                                ddlState.Enabled = false;
+                                btnEdit.Visible = false;
+                            }
+                            break;
+                        case Consult.ConsultState.AutoCanceled:
+                            ddlState.SelectedIndex = 3;
+                            ddlState.Enabled = false;
+                            btnEdit.Visible = false;
+                            break;
+                        case Consult.ConsultState.Confirmed:
+                            ddlState.SelectedIndex = 1;
+                            break;
+                    }
                     Session["tempConsult"] = c;
                 }
             }
@@ -55,54 +80,57 @@ public partial class ConsultDetail : BasePage
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        if (Session["tempConsult"] == null && Session["tempPatient"] == null && Request.Params["consultId"] == null && Request.Params["patientId"] == null) {
-            this.litError.Text = Message.getMessage("Ocurrio un error, refresque la pagina por favor vuelva a intentarlo", Message.KindOfMessage.error);
-        }
-        else
-        {
-            Consult c = null;
-            if (Session["tempConsult"] != null)
+        if (this.litError.Text.Length == 0) {
+            if (Session["tempConsult"] == null && Session["tempPatient"] == null && Request.Params["consultId"] == null && Request.Params["patientId"] == null)
             {
-                c = (Consult)Session["tempConsult"];
-                this.makeConsult(c);
-                BusinessLogic.updateConsult(c);
-                this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
+                this.litError.Text = Message.getMessage("Ocurrio un error, refresque la pagina por favor vuelva a intentarlo", Message.KindOfMessage.error);
             }
-            else if (Request.Params["consultId"] != null)
+            else
             {
-                int id = int.Parse(Request.Params["consultId"]);
-                if (id > 0)
+                Consult c = null;
+                if (Session["tempConsult"] != null)
                 {
-                    c = BusinessLogic.getConsult(id);
+                    c = (Consult)Session["tempConsult"];
                     this.makeConsult(c);
                     BusinessLogic.updateConsult(c);
                     this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
                 }
-            }
-
-            if (c == null)
-            {
-                Patient p = null;
-                if (Session["tempPatient"] != null)
+                else if (Request.Params["consultId"] != null)
                 {
-                    p = (Patient)Session["tempPatient"];
-                    c = new Consult();
-                    c.patient = p;
-                    this.makeConsult(c);
-                    BusinessLogic.insertConsult(c);
-                    this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
-                }
-                else
-                {
-                    int id = int.Parse(Request.Params["patientId"]);
+                    int id = int.Parse(Request.Params["consultId"]);
                     if (id > 0)
                     {
+                        c = BusinessLogic.getConsult(id);
+                        this.makeConsult(c);
+                        BusinessLogic.updateConsult(c);
+                        this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
+                    }
+                }
+
+                if (c == null)
+                {
+                    Patient p = null;
+                    if (Session["tempPatient"] != null)
+                    {
+                        p = (Patient)Session["tempPatient"];
                         c = new Consult();
-                        c.patient = new Patient();
-                        c.patient.id = id;
+                        c.patient = p;
                         this.makeConsult(c);
                         BusinessLogic.insertConsult(c);
                         this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
+                    }
+                    else
+                    {
+                        int id = int.Parse(Request.Params["patientId"]);
+                        if (id > 0)
+                        {
+                            c = new Consult();
+                            c.patient = new Patient();
+                            c.patient.id = id;
+                            this.makeConsult(c);
+                            BusinessLogic.insertConsult(c);
+                            this.litError.Text = Message.getMessage("Los cambios se guardaron correctamente", Message.KindOfMessage.success);
+                        }
                     }
                 }
             }
@@ -130,7 +158,7 @@ public partial class ConsultDetail : BasePage
         c.rating = int.Parse(txtRating.Text);
         c.treatment = txtTreatment.Text;
         c.clinicalAnalysis = txtClinicAnalysis.Text;
-        
+        c.state = (Consult.ConsultState)ddlState.SelectedIndex + 1;
         return c;
     }
     private DateTime getDateFromStrings(string strDate, string strTime)

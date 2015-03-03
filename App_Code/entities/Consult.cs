@@ -58,15 +58,31 @@ public class Consult
                 this.rating = (int)r["rating"];
             this.assignedTo = new User(r);
 
-            int state = (int)r["rating"];
+            int state = (int)r["state"];
             this.loadStateFromInt(state);
+        }
+    }
+
+    public string getStateString() {
+        switch (this.state) { 
+            case ConsultState.AutoCanceled:
+                return "No asistió";
+            case ConsultState.Canceled:
+                return "Cancelada";
+            case ConsultState.Confirmed:
+                return "Concurrida";
+            case ConsultState.Pending:
+                return "Pendiente";
+            default:
+                return "";
+
         }
     }
 
     public void loadStateFromInt(int state) {
         switch (state) {
                 case 1:
-                    DateComparisonResult compare = (DateComparisonResult)this.endDate.CompareTo(DateTime.Now.AddDays(1));
+                    DateComparisonResult compare = (DateComparisonResult)this.endDate.CompareTo(DateTime.Now.AddDays(-1));
                     if (compare == DateComparisonResult.Earlier)
                     {
                         this.state = ConsultState.AutoCanceled;
@@ -88,7 +104,7 @@ public class Consult
     }
 
     public string convertToCalendarJson () {
-        return "{\"start\":  \"" + startDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"end\":  \"" + this.endDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"title\":\"" + this.patient.name + "\", \"id\":\"" + this.id + "\"}";
+        return "{\"start\":  \"" + startDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"end\":  \"" + this.endDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"title\":\"" + this.patient.name + "\", \"id\":\"" + this.id + "\", \"color\":\"" + getColorNameByState() + "\"}";
     }
 
     public string convertToObjectJson()
@@ -96,8 +112,29 @@ public class Consult
         return "{\"startDate\":  \"" + startDate.ToString("dd/MM/yyyy HH:mm") + "\", \"endDate\":  \"" + this.endDate.ToString("dd/MM/yyyy HH:mm") + "\", \"id\":\"" + this.id + "\", \"price\":\""+ this.price +"\", \"state\":\"" + this.state.ToString() + "\"}";
     }
 
+    private string getColorNameByState() {
+        switch (this.state)
+        {
+            case ConsultState.AutoCanceled:
+                return "red";
+            case ConsultState.Canceled:
+                return "pink";
+            case ConsultState.Confirmed:
+                return "green";
+            case ConsultState.Pending:
+                return "#000000";
+            default:
+                return "";
+
+        }
+    }
+
     public static void addDBParametersFromConsult(Consult c, SqlCommand comm)
     {
+        SqlParameter state = new SqlParameter("@state", System.Data.SqlDbType.Int);
+        state.Value = c.state.GetHashCode();
+        comm.Parameters.Add(state);
+
         SqlParameter startDate = new SqlParameter("@startDate", System.Data.SqlDbType.DateTime);
         startDate.Value = c.startDate;
         comm.Parameters.Add(startDate);

@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Balloons" ContentPlaceHolderID="Balloons" runat="server">
+    <!--
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat dashboard-stat-light blue-soft" href="#">
@@ -65,7 +66,7 @@
             </a>
         </div>
     </div>
-
+    -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!-- Proximas consultas -->
@@ -94,6 +95,8 @@
                             </th>
                             <th>Teléfono
                             </th>
+                            <th>Estado
+                            </th>
                             <th>Acción
                             </th>
                         </tr>
@@ -113,6 +116,9 @@
                                     </td>
                                     <td>
                                         <asp:Literal ID="litPhone" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litEstado" runat="server" />
                                     </td>
                                     <td>
                                         <asp:Literal ID="litAction" runat="server" />

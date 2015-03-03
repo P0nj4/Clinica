@@ -28,6 +28,8 @@ public partial class _Default : BasePage
             litPhone.Text = consult.patient.phone;
             Literal litAction = (Literal)e.Item.FindControl("litAction");
             litAction.Text = "<a href='ConsultDetail.aspx?consultId=" + consult.patient.id.ToString() + "'>Ver más</a>";
+            Literal litEstado = (Literal)e.Item.FindControl("litEstado");
+            litEstado.Text = consult.getStateString();
         }
     }
 }

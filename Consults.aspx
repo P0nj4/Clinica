@@ -34,6 +34,8 @@
                             </th>
                             <th>Teléfono
                             </th>
+                            <th>Estado
+                            </th>
                             <th>Acción
                             </th>
                         </tr>
@@ -53,6 +55,9 @@
                                     </td>
                                     <td>
                                         <asp:Literal ID="litPhone" runat="server" />
+                                    </td>
+                                    <td>
+                                        <asp:Literal ID="litEstado" runat="server" />
                                     </td>
                                     <td>
                                         <asp:Literal ID="litAction" runat="server" />

@@ -62,6 +62,14 @@
 
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3">Estado</label>
+                        <div class="col-md-4">
+                            <asp:DropDownList ID="ddlState" CssClass="ddlState" runat="server">
+                                
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-3">Precio</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtPrice" CssClass="form-control txtPrice" runat="server" required />
@@ -102,9 +110,9 @@
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
                             <asp:Button CssClass="btn red btnCancel" ID="btnCancel" runat="server" Text="Cancelar Consulta" OnClick="btnCancel_Click" />
-                            <asp:Button CssClass="btn green btnSubmit" ID="btnSubmit" runat="server" Text="Guardar Cambios" OnClick="btnSubmit_Click" >
+                            <asp:Button CssClass="btn green btnSubmit" ID="btnSubmit" runat="server" Text="Guardar Cambios" OnClick="btnSubmit_Click" OnClientClick="if(!FireConfirm()) return false;" >
                             </asp:Button>
-                             <a class="btn default edit">Editar</a>
+                             <a id="btnEdit" runat="server" class="btn default edit">Editar</a>
                         </div>
                     </div>
                 </div>
@@ -122,6 +130,13 @@
     <script src="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
     <script src="assets/mine.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+        function FireConfirm() {
+            if ($(".ddlState option:selected").text() == "Pendiente") {
+                return confirm("Está seguro de que no quiere cambiar el estado de la consulta a confirmado? \n (Confirmado: el paciente concurrió a la consulta)")
+            }
+            return true;
+        }
 
         $(document).ready(function () {
 
