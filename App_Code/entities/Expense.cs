@@ -4,14 +4,17 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for Expenses
+/// Summary description for Expense
 /// </summary>
-public class Expenses
+public class Expense
 {
-    public int id { get; set; }
+
+    public DateTime day { get; set; }
     public string name { get; set; }
-    public DateTime paymentDay { get; set; } 
-	public Expenses()
+    public int id { get; set; }
+    public double amount { get; set; }
+	
+    public Expense()
 	{
 		//
 		// TODO: Add constructor logic here

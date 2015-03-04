@@ -370,7 +370,7 @@ public class BusinessLogic
     
     #endregion
 
-
+    #region user
     public static User login(string email, string password) {
         User response = null;
         try
@@ -424,5 +424,46 @@ public class BusinessLogic
         }
         return sb.ToString();
     }
+
+    #endregion
+
+    #region Expenses
+    public static List<Expense> getAllExpensesForMonth(int clinicId)
+    {
+        List<Expense> result = new List<Expense>();
+        try
+        {
+            myConnection.Open();
+            SqlDataReader r = null;
+            SqlCommand myCommand = new SqlCommand("select * from Expenses where clinicId = @clinicId ", myConnection);
+
+            SqlParameter pclinicId = new SqlParameter("@clinicId", System.Data.SqlDbType.Int);
+            pclinicId.Value = clinicId;
+            myCommand.Parameters.Add(pclinicId);
+            
+            r = myCommand.ExecuteReader();
+            Expense ex;
+            
+            while (r.Read())
+            {
+                ex = new Expense();
+                ex.id = (int)r["id"];
+                ex.day = (DateTime)r["day"];
+                ex.name = r["name"].ToString();
+                result.Add(ex);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.ToString());
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return result;
+    }
+
+    #endregion
 
 }
