@@ -10,8 +10,6 @@
         .hidden {
             display:none;
         }
-
-
     </style>
    
 </asp:Content>

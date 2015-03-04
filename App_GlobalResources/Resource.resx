@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="page_addexpense" xml:space="preserve">
-    <value />
+    <value>Nuevo Gasto</value>
   </data>
   <data name="page_addpatient" xml:space="preserve">
     <value>Agregar paciente</value>
@@ -130,13 +130,16 @@
     <value>Detalles de la consulta</value>
   </data>
   <data name="page_consults" xml:space="preserve">
-    <value />
+    <value>Consultas</value>
   </data>
   <data name="page_dashboard" xml:space="preserve">
     <value>Inicio</value>
   </data>
   <data name="page_default" xml:space="preserve">
     <value>Inicio</value>
+  </data>
+  <data name="page_expenses" xml:space="preserve">
+    <value>Gastos</value>
   </data>
   <data name="page_patientdetail" xml:space="preserve">
     <value>Detalles del paciente</value>

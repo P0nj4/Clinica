@@ -450,11 +450,13 @@ public class BusinessLogic
                 ex.id = (int)r["id"];
                 ex.day = (DateTime)r["day"];
                 ex.name = r["name"].ToString();
+                ex.amount = double.Parse(r["amount"].ToString());
                 result.Add(ex);
             }
         }
         catch (Exception ex)
         {
+            throw ex;
             Debug.WriteLine(ex.ToString());
         }
         finally

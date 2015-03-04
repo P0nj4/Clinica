@@ -65,6 +65,26 @@
                                     <span class="arrow "></span>
                                 </a>
                             </li>
+                            <li ID="liExpenses" runat="server">
+                                <a href="javascript:;">
+                                    <i class="icon-notebook "></i>
+                                    <span class="title">Gastos</span>
+                                    <span class="selected"></span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="Expenses.aspx">
+                                            <i class="icon-list"></i>
+                                            Listado</a>
+                                    </li>
+                                    <li>
+                                        <a href="AddExpense.aspx">
+                                            <i class="icon-calendar"></i>
+                                            Nuevo gasto</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->
                     </div>
